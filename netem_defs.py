@@ -1,4 +1,4 @@
-class netem_corrupt:
+class NetemCorrupt:
     def __init__(self, base_corrupt='0', correlation=None):
         self.base_corrupt = base_corrupt
         self.correlation = correlation
@@ -11,7 +11,7 @@ class netem_corrupt:
         return corrupt_str
 
 
-class netem_reorder:
+class NetemReorder:
     def __init__(self, base_reorder='0', correlation=None):
         self.base_reorder = base_reorder
         self.correlation = correlation
@@ -24,7 +24,7 @@ class netem_reorder:
         return reorder_str
 
 
-class netem_dupe:
+class NetemDupe:
     def __init__(self, base_dupe='0', correlation=None):
         self.base_dupe = base_dupe
         self.correlation = correlation
@@ -37,7 +37,7 @@ class netem_dupe:
         return dupe_str
 
 
-class netem_loss:
+class NetemLoss:
     def __init__(self, base_loss='0', correlation=None):
         self.base_lat = base_loss
         self.correlation = correlation
@@ -50,7 +50,7 @@ class netem_loss:
         return loss_str
 
 
-class netem_latency:
+class NetemLatency:
     def __init__(self, base_lat='0', jitter=None, correlation=None):
         self.base_lat = base_lat
         self.jitter = jitter
@@ -65,36 +65,3 @@ class netem_latency:
             delay_str = delay_str + " " + self.correlation + "%"
 
         return delay_str
-
-
-class ip_traffic_class:
-
-    def __init__(self, ip, in_id, out_id, parent_id):
-        self.ip = ip
-        self.in_id = in_id
-        self.out_id = out_id
-        self.parent_id = parent_id
-        self.stage_changed_ms = 0
-        self.in_rate = '10024'
-        self.out_rate = '10024'
-
-        self.in_dupe = netem_dupe()
-        self.in_loss = netem_loss()
-        self.in_corrupt = netem_corrupt()
-        self.in_lat = netem_latency()
-
-        self.out_dupe = netem_dupe()
-        self.out_loss = netem_loss()
-        self.out_corrupt = netem_corrupt()
-        self.out_lat = netem_latency()
-
-        return
-
-    def set_script_id(self, script_id):
-        self.script_id = script_id
-
-    def set_script_stage(self, script_stage_id):
-        self.script_stage_id = script_stage_id
-
-    def get_last_stage_change_ms(self):
-        return self.stage_changed_ms

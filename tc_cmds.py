@@ -79,6 +79,17 @@ def tc_create_ip_filter(iface, ip, prnt_qdisc_id, prnt_class_id, ip_is_dst=False
     return
 
 
+def tc_create_netem_qdisc(iface, ip, netem_def, qdisc_id, prnt_qdisc_id):
+    stdout, stderr = tc_execute_cmd(TC_QDISC, TC_ADD, TC_DEV, iface, TC_PARNT, prnt_qdisc_id,
+                                    TC_HNDL, qdisc_id + ":", TC_NETEM, netem_def)
+    return
+
+
+def tc_change_netem_qdisc(iface, ip, netem_def, qdisc_id, prnt_qdisc_id):
+    stdout, stderr = tc_execute_cmd(TC_QDISC, TC_CHANGE, TC_DEV, iface, TC_PARNT, prnt_qdisc_id,
+                                    TC_HNDL, qdisc_id + ":", TC_NETEM, netem_def)
+    return
+
 def debug_tc_showqdiscs():
     stdout, stderr = tc_execute_cmd(TC_QDISC)
     log_raw_output(stdout, stderr)
