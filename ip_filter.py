@@ -3,23 +3,26 @@ import netem_defs as nems
 
 class NetemSettings:
     def __init__(self):
-        self.loss = nems.NetemLoss()
-        self.dupe = nems.NetemDupe()
-        self.reorder = nems.NetemReorder()
-        self.corrupt = nems.NetemCorrupt()
-        self.latency = nems.NetemLatency()
+        self._loss = nems.NetemLoss()
+        self._dupe = nems.NetemDupe()
+        self._reorder = nems.NetemReorder()
+        self._corrupt = nems.NetemCorrupt()
+        self._latency = nems.NetemLatency()
 
     def __str__(self):
-        return "{0} {1} {2} {3} {4}".format(self.loss,
-                                            self.dupe,
-                                            self.reorder,
-                                            self.corrupt,
-                                            self.latency)
+        return "{0} {1} {2} {3} {4}".format(self._loss,
+                                            self._dupe,
+                                            self._reorder,
+                                            self._corrupt,
+                                            self._latency)
 
 
-class IPTrafficClass:
-
+class IPTrafficFilter:
+    """
+    IPTrafficFilter holds the current settings for a specific IP address
+    """
     def __init__(self, ip, in_id, out_id, parent_id):
+
         self.ip = ip
         self.in_id = in_id
         self.out_id = out_id

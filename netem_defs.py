@@ -4,7 +4,8 @@ class NetemCorrupt:
         self.correlation = correlation
 
     def __str__(self):
-        corrupt_str = 'corrupt' + self.base_corrupt
+        corrupt_str = 'corrupt{0}'.format(self.base_corrupt)
+
         if self.correlation is not None:
             corrupt_str = corrupt_str + " " + self.correlation + "%"
 
