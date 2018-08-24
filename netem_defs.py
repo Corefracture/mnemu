@@ -1,68 +1,79 @@
-class NetemCorrupt:
+import logging
+
+LOGGER = logging.getLogger(__name__)
+
+
+class NetemAtrrib:
+    def __init__(self, val, corr_percent=None):
+        self._base_val = val
+        self._corr_percent = corr_percent
+        self._attrib_str = None
+
+    def set(self, val):
+        try:
+            float(val)
+            self._base_val = str(val)
+        except Exception as exp:
+            # TODO: Logging for exp here
+            return
+
+    def get_val(self):
+        return self._base_val
+
+    def set_corr_percent(self, corr_percent):
+        try:
+            self._corr_percent = float(corr_percent)
+        except Exception as exp:
+            # TODO: cf: Logging for exp
+            return
+
+    def get_corr_percent(self):
+        return self._corr_percent
+
+    def __str__(self):
+        if self._base_val is "0":
+            return ""
+
+        attrib_str = '{0} {1}'.format(self._attrib_str, self._base_val)
+
+        if self._corr_percent is not None:
+            attrib_str = "{0} {1}%".format(attrib_str, self._corr_percent)
+
+        return attrib_str
+
+
+class NetemCorrupt(NetemAtrrib):
     def __init__(self, base_corrupt='0', correlation=None):
-        self.base_corrupt = base_corrupt
-        self.correlation = correlation
-
-    def __str__(self):
-        corrupt_str = 'corrupt{0}'.format(self.base_corrupt)
-
-        if self.correlation is not None:
-            corrupt_str = corrupt_str + " " + self.correlation + "%"
-
-        return corrupt_str
+        NetemAtrrib.__init__(self, base_corrupt, correlation)
+        self._attrib_str = "corrupt"
 
 
-class NetemReorder:
+class NetemReorder(NetemAtrrib):
     def __init__(self, base_reorder='0', correlation=None):
-        self.base_reorder = base_reorder
-        self.correlation = correlation
-
-    def __str__(self):
-        reorder_str = 'reorder' + self.base_reorder
-        if self.correlation is not None:
-            reorder_str = reorder_str + " " + self.correlation + "%"
-
-        return reorder_str
+        NetemAtrrib.__init__(self, base_reorder, correlation)
+        self._attrib_str = "reorder"
 
 
-class NetemDupe:
+class NetemDupe(NetemAtrrib):
     def __init__(self, base_dupe='0', correlation=None):
-        self.base_dupe = base_dupe
-        self.correlation = correlation
-
-    def __str__(self):
-        dupe_str = 'duplicate' + self.base_dupe
-        if self.correlation is not None:
-            dupe_str = dupe_str + " " + self.correlation + "%"
-
-        return dupe_str
+        NetemAtrrib.__init__(self, base_dupe, correlation)
+        self._attrib_str = "duplicate"
 
 
-class NetemLoss:
+class NetemLoss(NetemAtrrib):
     def __init__(self, base_loss='0', correlation=None):
-        self.base_lat = base_loss
-        self.correlation = correlation
-
-    def __str__(self):
-        loss_str = 'loss' + self.base_lat
-        if self.correlation is not None:
-            loss_str = loss_str + " " + self.correlation + "%"
-
-        return loss_str
+        NetemAtrrib.__init__(self, base_loss, correlation)
+        self._attrib_str = "loss"
 
 
-class NetemLatency:
-    def __init__(self, base_lat='0', jitter=None, correlation=None):
-        self.base_lat = base_lat
-        self.jitter = jitter
-        self.correlation = correlation
+class NetemJitter(NetemAtrrib):
+    def __init__(self, base_lat='0', correlation=None):
+        NetemAtrrib.__init__(self, base_lat, correlation)
+        # JITTER IS SET WITH DELAY, therefor do not set attrib name or correlation
+        self._attrib_str = ""
 
-    def __str__(self):
-        delay_str = 'delay' + self.base_lat
-        if self.jitter is not None:
-            delay_str = delay_str + " " + self.jitter
 
-        if self.correlation is not None:
-            delay_str = delay_str + " " + self.correlation + "%"
-
-        return delay_str
+class NetemLatency(NetemAtrrib):
+    def __init__(self, base_lat='0', correlation=None):
+        NetemAtrrib.__init__(self, base_lat, correlation)
+        self._attrib_str = "delay"
