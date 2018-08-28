@@ -6,7 +6,7 @@ from flask import request
 import mnemu
 from ip_filter import NetemType
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='web_content')
 mnemu_web = None
 
 
@@ -72,9 +72,13 @@ def get_known_ips():
     return json.dumps(mnemu_web.get_known_ips())
 
 
+@app.route('/ip/<ipnum>')
+def specific_ip(ipnum):
+    return
+
 @app.route('/')
 def hello_world():
-    return request.args.get("test")
+    return app.send_static_file('index.html')
 
 
 @app.route('/test')
