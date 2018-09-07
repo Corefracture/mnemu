@@ -11,6 +11,7 @@ class NetemAtrrib:
 
     def set(self, val):
         try:
+            #verify the cast to float so we ensure we're dealing with proper values
             float(val)
             self._base_val = str(val)
         except Exception as exp:
@@ -31,7 +32,7 @@ class NetemAtrrib:
         return self._corr_percent
 
     def __str__(self):
-        if self._base_val is "0":
+        if self._base_val == "0":
             return ""
 
         attrib_str = '{0} {1}'.format(self._attrib_str, self._base_val)

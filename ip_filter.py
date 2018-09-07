@@ -22,7 +22,7 @@ class NetemSettings:
         self._jitter = nems.NetemJitter()
 
     def get_netem_setting(self, setting_type):
-        if setting_type is NetemType.LATENCY:
+        if setting_type == NetemType.LATENCY:
             return self._latency
         if setting_type is NetemType.JITTER:
             return self._jitter
@@ -41,15 +41,14 @@ class IPTrafficFilter:
     IPTrafficFilter holds the current settings for a specific IP address
     """
 
-    def __init__(self, ip, in_id, out_id, parent_id):
+    def __init__(self, ip, in_id, out_id):
 
         self.ip = ip
         self.in_id = in_id
         self.out_id = out_id
-        self.parent_id = parent_id
         self.stage_changed_ms = 0
-        self._in_rate = '10000'
-        self._out_rate = '10000'
+        self._in_rate = '1000000'
+        self._out_rate = '1000000'
 
         self.in_netem = NetemSettings()
         self.out_netem = NetemSettings()
@@ -83,27 +82,27 @@ class IPTrafficFilter:
 
     def set_netem_setting(self, setting_type, setting_val, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        netem_type_set = netem_settings.get_netem_setting(setting_type)
+        netem_type_set = netem_settings.get_netem_setting(NetemType(setting_type))
         netem_type_set.set(setting_val)
 
         return netem_type_set.get_val()
 
     def get_netem_setting(self, setting_type, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        netem_type_set = netem_settings.get_netem_setting(setting_type)
+        netem_type_set = netem_settings.get_netem_setting(NetemType(setting_type))
 
         return netem_type_set.get_val()
 
     def set_netem_setting_corr(self, setting_type, setting_correlation, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        netem_type_set = netem_settings.get_netem_setting(setting_type)
+        netem_type_set = netem_settings.get_netem_setting(NetemType(setting_type))
         netem_type_set.set_corr_percent(setting_correlation)
 
         return netem_type_set.get_corr_percent()
 
     def get_netem_setting_corr(self, setting_type, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        netem_type_set = netem_settings.get_netem_setting(setting_type)
+        netem_type_set = netem_settings.get_netem_setting(NetemType(setting_type))
 
         return netem_type_set.get_corr_percent()
 
@@ -127,16 +126,15 @@ class IPTrafficFilter:
         ret_val = ""
 
         if netem_sets is not None:
-            ret_val = ""
             setting = netem_sets.get_netem_setting(NetemType.LATENCY).__str__()
             if setting is not "":
+                setting = setting + "ms"
                 jitter = netem_sets.get_netem_setting(NetemType.JITTER)
                 if jitter.get_val() is not "0":
                     # insert the jitter value in the middle
                     setting_split = setting.split(' ')
-                    setting_split.insert(1, jitter.get_val())
+                    setting_split.insert(2, jitter.get_val() + "ms")
                     setting = " ".join(setting_split)
-
                 ret_val = ret_val + setting
 
             setting = netem_sets.get_netem_setting(NetemType.REORDER).__str__()
@@ -152,25 +150,32 @@ class IPTrafficFilter:
             if setting is not "":
                 ret_val = ret_val + " " + setting
 
+        if ret_val is None:
+            ret_val = ""
+
         return ret_val
 
     def get_netemvals_as_dict(self, inbound=True):
         ret_val = {}
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        ret_val["loss"] = netem_settings.get_netem_setting(NetemType.LOSS).get_val()
-        ret_val["lat"] = netem_settings.get_netem_setting(NetemType.LATENCY).get_val()
-        ret_val["dupe"] = netem_settings.get_netem_setting(NetemType.DUPE).get_val()
-        ret_val["reord"] = netem_settings.get_netem_setting(NetemType.REORDER).get_val()
-        ret_val["corru"] = netem_settings.get_netem_setting(NetemType.CORRUPT).get_val()
-        ret_val["jitter"] = netem_settings.get_netem_setting(NetemType.JITTER).get_val()
+        prefix = "in_" if inbound is True else "out_"
+        ret_val[prefix + "loss"] = netem_settings.get_netem_setting(NetemType.LOSS).get_val()
+        ret_val[prefix + "latency"] = netem_settings.get_netem_setting(NetemType.LATENCY).get_val()
+        ret_val[prefix + "dupe"] = netem_settings.get_netem_setting(NetemType.DUPE).get_val()
+        ret_val[prefix + "reord"] = netem_settings.get_netem_setting(NetemType.REORDER).get_val()
+        ret_val[prefix + "corrupt"] = netem_settings.get_netem_setting(NetemType.CORRUPT).get_val()
+        ret_val[prefix + "jitter"] = netem_settings.get_netem_setting(NetemType.JITTER).get_val()
 
         return ret_val
 
-    def web_str(self):
+    def as_dict(self):
         ret_val_dict = {}
-        ret_val_dict["in_rate"] = self.get_in_rate()
-        ret_val_dict["out_rate"] = self.get_out_rate()
-        ret_val_dict["in"] = self.get_netemvals_as_dict(True)
-        ret_val_dict["out"] = self.get_netemvals_as_dict(False)
+        ret_val_dict["in_bandwidth"] = self.get_in_rate()
+        ret_val_dict["out_bandwidth"] = self.get_out_rate()
+        ret_val_dict.update(self.get_netemvals_as_dict(True))
+        ret_val_dict.update(self.get_netemvals_as_dict(False))
 
-        return json.dumps(ret_val_dict)
+        return ret_val_dict
+
+    def web_str(self):
+        return json.dumps(self.as_dict())

@@ -22,14 +22,26 @@ def get_ip(req):
 
 # region NETEM SET VALUES
 
-@app.route('/netem/set/')
-def set_netem_value():
-    ip = get_ip(request)
+@app.route('/<ipnum>/bandwidth/<val>/<inorout>')
+def set_ip_bandwidth(ipnum, val, inorout):
+    if inorout == "in":
+        inbound = True
+    else:
+        inbound = False
+
+    val_set_to = mnemu_web.set_ip_bandwidth(ipnum, val, inbound)
+
+    return "Hello!"
+
+
+@app.route('/netem/set/<ipnum>')
+def set_netem_value(ipnum):
+
     netem_type = request.args.get("netem_type")
     netem_val = request.args.get("netem_val")
-    inbound = not request.args.keys().__contains__("outbound")
+    inbound = not request.args.__contains__("outbound")
 
-    return mnemu_web.set_netem_setting_value(ip, netem_type, netem_val, inbound)
+    return mnemu_web.set_netem_setting_value(ipnum, netem_type, netem_val, inbound)
 
 
 @app.route('/netem/set/corr/')
@@ -71,10 +83,17 @@ def get_netem_correlation():
 def get_known_ips():
     return json.dumps(mnemu_web.get_known_ips())
 
+@app.route('/me')
+def setup_visitng_up():
+    ip = get_ip(request)
+    ret_val = {}
+    ret_val["ip"] = ip
+    ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).as_dict();
+    return json.dumps(ret_val)
 
 @app.route('/ip/<ipnum>')
 def specific_ip(ipnum):
-    return
+    return mnemu_web.get_ip_settings(ipnum).web_str()
 
 @app.route('/')
 def hello_world():
@@ -95,5 +114,5 @@ def test():
 
 
 if __name__ == '__main__':
-    mnemu_web = mnemu.MNemu("none", '9999')
-    app.run()
+    mnemu_web = mnemu.MNemu("ens192")
+    app.run(host="0.0.0.0", port=9999)

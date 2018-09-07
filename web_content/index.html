@@ -1,0 +1,262 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="web_content/mnemu_main.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css">
+    <link rel="stylesheet" href="web_content/styles.css">
+    <style>
+
+        #secondGroup {
+/* transform: translate(0px, 0px); */
+display: block;
+}
+
+  .mn-grid {
+      alignment: center;
+  }
+    .mn-grid .mdl-cell {
+  box-sizing: border-box;
+  background-color: dimgray;
+
+  padding-left: 8px;
+  padding-top: 4px;
+  color: white;
+}
+
+    </style>
+  </head>
+  <body id="bod">
+
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+
+        <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 is-casting-shadow"><div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title" id="selected_ip">Selected IP: None</span>
+
+          <div class="mdl-layout-spacer"></div>
+            <button class="mdl-button mdl-js-button mdl-button--raised">
+                Remove IP
+            </button>
+
+        </div>
+      </header>
+
+      <div class="drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50" onload="get_ips()">
+        <header class="demo-drawer-header">
+            <span class="mdl-layout-title">MNemu</span>
+            <br/>
+            <br/>
+        </header>
+            <hr/>
+            <div class="mdl-layout-title">This IP:</div>
+            <nav class="mdl-navigation" id="this_device_ip">
+                <a class="mdl-navigation__link" href="" >10.0.0.1</a>
+            </nav>
+            <hr/>
+
+        <div class="mdl-layout-title">Known IPs:</div>
+
+        <nav class="mdl-navigation" id="ips_sec">
+
+            <a class="mdl-navigation__link" href="" id="buff">10.0.40.28</a>
+            <a class="mdl-navigation__link" href="?device=10.0.40.28">10.0.40.28</a>
+          <div class="mdl-layout-spacer"></div>
+
+        </nav>
+
+
+      </div>
+      <main class = "mdl-layout__content ">
+
+
+
+            <div class="mdl-layout-spacer"></div>
+
+
+
+          <div class = "mdl-grid mn-grid">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-cell">
+                <h5><b><u>Inbound Traffic</u></b></h5>
+                <!-- Numeric Textfield -->
+               <!-- Numeric Textfield with Floating Label -->
+
+                <div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_bandwidth" onchange="set_bandwidth(selected_id, this.value, false)">
+                    <label class="mdl-textfield__label" for="in_bandwidth">Bandwidth(Kilobits)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </div>
+                <br/>
+
+                <div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_latency" onchange="set_netem_setting(selected_id, '0', this.value, false)">
+                    <label class="mdl-textfield__label" for="in_latency">Latency(ms)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </div>
+
+                                                <div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_jitter" onchange="set_netem_setting(selected_id, '1', this.value, false)">
+                    <label class="mdl-textfield__label" for="in_jitter">Latency Jitter(ms)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </div>
+
+                <br/>
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_loss" onchange="set_netem_setting(selected_id, '3', this.value, false)">
+                    <label class="mdl-textfield__label" for="in_loss">Packet Loss %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_dupe" onchange="set_netem_setting(selected_id, '2', this.value, false)">
+                    <label class="mdl-textfield__label" for="in_dupe">Packet Duplication %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="in_corrupt" onchange="set_netem_setting(selected_id, '5', this.value, false)">
+                    <label class="mdl-textfield__label" for="in_corrupt">Packet Corruption %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+
+            </div>
+
+            <div class="mdl-cell">
+                <h5><b><u>Outbound Traffic</u></b></h5>
+
+                <!-- Numeric Textfield -->
+               <!-- Numeric Textfield with Floating Label -->
+
+                                <form action="">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_bandwidth" onchange="set_bandwidth(selected_id, this.value, true)">
+                    <label class="mdl-textfield__label" for="out_bandwidth">Bandwidth(Kilobits)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+                <br/>
+
+                <form>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_latency" onchange="set_netem_setting(selected_id, '0', this.value, true)">
+                    <label class="mdl-textfield__label" for="out_latency">Latency(ms)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+                                <form>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_jitter" onchange="set_netem_setting(selected_id, '1', this.value, true)">
+                    <label class="mdl-textfield__label" for="out_jitter">Latency Jitter(ms)</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+            <br/>
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_loss" onchange="set_netem_setting(selected_id, '3', this.value, true)">
+                    <label class="mdl-textfield__label" for="out_loss">Packet Loss %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_dupe" onchange="set_netem_setting(selected_id, '2', this.value, true)">
+                    <label class="mdl-textfield__label" for="out_dupe">Packet Duplication %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+                <form action="#">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="out_corrupt" onchange="set_netem_setting(selected_id, '5', this.value, true)">
+                    <label class="mdl-textfield__label" for="out_corrupt">Packet Corruption %</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                </form>
+
+
+            </div>
+            <div class="mdl-layout-spacer"></div>
+
+        </div>
+     </main>
+    </div>
+
+    <div class="mdl-tooltip" data-mdl-for="buff">eXtensible Markup Language</div>
+    <div class="mdl-tooltip" data-mdl-for="flubber">eXtensible Markup Language</div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  </body>
+</html>
