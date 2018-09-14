@@ -1,35 +1,40 @@
+// Copyright (C) 2018 Corefracture, Chris Coleman.
+// www.corefracture.com - @corefracture
+//
+// Licensed under the MIT License, https://opensource.org/licenses/MIT
+// See LICENSE.md for more details
+
 var selected_id = "0.0.0.0";
 
 
 function load_ip_data(ip, data) {
-        $.each(data, function (key, val) {
-            elem = document.getElementById(key);
-            if(elem != null) {
-                elem.value = val;
-                prnt = elem.parentElement;
-                prnt.classList.add("is-dirty");
-            }});
-        selected_id = ip;
-        selected_ip_elem = document.getElementById("selected_ip");
-        selected_ip_elem.innerText = "IP: " + ip;
+    $.each(data, function (key, val) {
+        elem = document.getElementById(key);
+        if (elem != null) {
+            elem.value = val;
+            prnt = elem.parentElement;
+            prnt.classList.add("is-dirty");
+        }
+    });
+    selected_id = ip;
+    selected_ip_elem = document.getElementById("selected_ip");
+    selected_ip_elem.innerText = "IP: " + ip;
 }
 
 function request_ip_data(ip) {
     str_alert = "";
     $.getJSON("/ip/" + ip, function (data) {
-            load_ip_data(ip, data);
-        });
+        load_ip_data(ip, data);
+    });
 }
 
 function set_presets_to_none() {
     in_preset_selector = document.getElementById("preset_in");
-    if(in_preset_selector != null)
-    {
+    if (in_preset_selector != null) {
         in_preset_selector.value = "None"
     }
     out_preset_selector = document.getElementById("preset_out");
-    if(out_preset_selector != null)
-    {
+    if (out_preset_selector != null) {
         out_preset_selector.value = "None"
     }
 }

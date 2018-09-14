@@ -1,10 +1,17 @@
+# Copyright (C) 2018 Corefracture, Chris Coleman.
+# www.corefracture.com - @corefracture
+#
+# Licensed under the MIT License, https://opensource.org/licenses/MIT
+# See LICENSE.md for more details
+
 import json
 
 from flask import Flask
 from flask import request
+
 import mnemu
-from mnemu_presets import MNemuPresets
 from ip_filter import NetemType
+from mnemu_presets import MNemuPresets
 
 app = Flask(__name__, static_folder='web_content')
 mnemu_web = None
