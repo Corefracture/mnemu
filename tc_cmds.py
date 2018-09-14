@@ -59,6 +59,11 @@ def tc_reset(iface):
 
     log_raw_output(stdout, stderr)
 
+def tc_ingress_reset(iface):
+    stdout, stderr = _execute_task("tc", "qdisc", "del", "dev", iface, "ingress")
+
+    log_raw_output(stdout, stderr)
+
 
 def tc_create_root_tokenbucket_qdisc(iface, qdiscid):
     stdout, stderr = _execute_task("tc", "qdisc", "add", "dev", iface, "root", "handle", qdiscid + ":", "htb")
@@ -113,9 +118,10 @@ def tc_add_ingress_qdisc(iface):
 
 def tc_update_netem_qdisc(iface, ip, netem_def, qdisc_id, prnt_qdisc_id):
     tc_remove_netem_qdisc(iface, qdisc_id, prnt_qdisc_id + ":" + qdisc_id)
-    if netem_def is None:
-        return _execute_task("tc", "qdisc", "add", "dev", iface, "parent", prnt_qdisc_id + ":" + qdisc_id,
-                                     "handle", qdisc_id + ":", "netem", "limit", "100000")
+    if netem_def is None or netem_def == "":
+        return ""
+        #return _execute_task("tc", "qdisc", "add", "dev", iface, "parent", prnt_qdisc_id + ":" + qdisc_id,
+                                     #"handle", qdisc_id + ":", "netem", "limit", "100000")
     else:
         return _execute_task("tc", "qdisc", "add", "dev", iface, "parent", prnt_qdisc_id + ":" + qdisc_id,
                                      "handle", qdisc_id + ":", "netem", "limit", "100000", *netem_def.split(" "))

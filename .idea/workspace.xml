@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2aca63e5-406e-41fb-ac6a-129608a38d71" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mnemu_presets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web_content/MDL_LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmds.py" beforeDir="false" afterPath="$PROJECT_DIR$/tc_cmds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ip_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ip_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mnemu.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mnemu_web.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu_web.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netem_defs.py" beforeDir="false" afterPath="$PROJECT_DIR$/netem_defs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_content/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_content/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_content/mnemu_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/web_content/mnemu_main.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/mnemu$mnemu_web.coverage" NAME="mnemu_web Coverage Results" MODIFIED="1536889922642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mnemu$test.coverage" NAME="test Coverage Results" MODIFIED="1536634952243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mnemu$mnemu_debug.coverage" NAME="mnemu_debug Coverage Results" MODIFIED="1535502289123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1641863476">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.7" value="3" />
+          <entry key="project.open.time.8" value="3" />
+          <entry key="project.opened" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="LICENSE" value="5" />
+          <entry key="css" value="1" />
+          <entry key="html" value="3" />
+          <entry key="js" value="4" />
+          <entry key="py" value="22" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="1" />
+          <entry key="HTML" value="3" />
+          <entry key="JavaScript" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="22" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="LICENSE" value="13" />
+          <entry key="dummy" value="101" />
+          <entry key="html" value="3582" />
+          <entry key="js" value="3358" />
+          <entry key="py" value="22758" />
+          <entry key="txt" value="270" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="3585" />
+          <entry key="JavaScript" value="3355" />
+          <entry key="PLAIN_TEXT" value="384" />
+          <entry key="Python" value="22758" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.vcs.git.usages" />
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.46576187">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tc_cmds.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="17">
+                  <caret line="63" selection-start-line="63" selection-end-line="63" />
+                  <folding>
+                    <marker date="1536874128661" expanded="true" signature="158:565" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mnemu.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="629">
+                  <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+                  <folding>
+                    <element signature="e#0#14#0" expanded="true" />
+                    <marker date="1536885990768" expanded="true" signature="288:293" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="1315:2304" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="2336:2449" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="2668:2674" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="2716:2787" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="2814:2892" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="4394:4778" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="4849:7005" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="5233:5879" ph="..." />
+                    <marker date="1536885990768" expanded="true" signature="7050:7426" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mnemu_presets.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+                  <folding>
+                    <marker date="1536636270746" expanded="true" signature="47:52" ph="..." />
+                    <marker date="1536636270746" expanded="true" signature="205:245" ph="..." />
+                    <marker date="1536636270746" expanded="true" signature="277:413" ph="..." />
+                    <marker date="1536636270746" expanded="true" signature="446:862" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mnemu_web.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                    <marker date="1536885618344" expanded="true" signature="264:500" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="453:500" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="849:1119" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="1413:1414" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="2206:2842" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="2428:2484" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="2585:2842" ph="..." />
+                    <marker date="1536885618344" expanded="true" signature="2992:3050" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web_content/styles.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="833">
+                  <caret line="49" column="1" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="19" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mnemu_debug.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="13" selection-start-column="13" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/netem_defs.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="816">
+                  <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+                  <folding>
+                    <element signature="e#0#14#0" expanded="true" />
+                    <marker date="1536635549566" expanded="true" signature="2302:2437" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/netem_script.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="34">
+                  <caret line="2" selection-start-line="2" selection-end-line="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web_content/mnemu_main.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="986">
+                  <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ip_filter.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="17">
+                  <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                    <marker date="1536633222732" expanded="true" signature="763:929" ph="..." />
+                    <marker date="1536633222732" expanded="true" signature="1337:2456" ph="..." />
+                    <marker date="1536633222732" expanded="true" signature="2817:2867" ph="..." />
+                    <marker date="1536633222732" expanded="true" signature="4332:5397" ph="..." />
+                    <marker date="1536633222732" expanded="true" signature="5093:5397" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web_content/MDL_LICENSE">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                  <caret line="13" column="48" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/LICENSE">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web_content/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1275">
+                  <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>.js</find>
+      <find>style</find>
+      <find>netem</find>
+      <find>TC_TC</find>
+      <find>tc_update_netem_qdisc</find>
+      <find>_tc_execute_cmd(</find>
+      <find>demo</find>
+      <find>script</find>
+      <find>Script s</find>
+      <find>ips/get</find>
+      <find>dst</find>
+      <find>set_</find>
+      <find>band</find>
+      <find>Remove</find>
+      <find>clear_ip_rules</find>
+      <find>float</find>
+      <find>bandwidth</find>
+      <find>ban</find>
+      <find>bandwi</find>
+      <find>button</find>
+      <find>preset</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>&quot;tc&quot;</replace>
+      <replace>&quot;ingress&quot;</replace>
+      <replace>_execute_task(&quot;tc&quot;,</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/netem_settings.py" />
+        <option value="$PROJECT_DIR$/ip_traffic_class.py" />
+        <option value="$PROJECT_DIR$/iptrafficclass.py" />
+        <option value="$PROJECT_DIR$/tc_cmds.py" />
+        <option value="$PROJECT_DIR$/logging.py" />
+        <option value="$PROJECT_DIR$/ip_filter_mgr.py" />
+        <option value="$PROJECT_DIR$/tc_mgr.py" />
+        <option value="$PROJECT_DIR$/mnemu_webapi.py" />
+        <option value="$PROJECT_DIR$/tc.py" />
+        <option value="$PROJECT_DIR$/mnemu_debug.py" />
+        <option value="$PROJECT_DIR$/netem_script.py" />
+        <option value="$PROJECT_DIR$/ip_filter.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/netem_defs.py" />
+        <option value="$PROJECT_DIR$/mnemu_presets.py" />
+        <option value="$PROJECT_DIR$/web_content/mnemu_main.js" />
+        <option value="$PROJECT_DIR$/cmds.py" />
+        <option value="$PROJECT_DIR$/mnemu.py" />
+        <option value="$PROJECT_DIR$/web_content/index.html" />
+        <option value="$PROJECT_DIR$/mnemu_web.py" />
+        <option value="$PROJECT_DIR$/LICENSE" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1920" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mnemu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mnemu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mnemu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mnemu" type="462c0819:PsiDirectoryNode" />
+              <item name="web_content" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mnemu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="tasks.servers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Code\Personal\mnemu\web_content" />
+      <recent name="C:\Code\Personal\mnemu\static" />
+      <recent name="C:\Code\Personal\mnemu" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.mnemu_web">
+    <configuration name="mnemu_debug" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="mnemu" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mnemu_debug.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mnemu_web" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="mnemu" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mnemu_web.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="mnemu" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.mnemu_web" />
+      <item itemvalue="Python.mnemu_debug" />
+      <item itemvalue="Python.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.mnemu_debug" />
+        <item itemvalue="Python.mnemu_web" />
+        <item itemvalue="Python.mnemu_web" />
+        <item itemvalue="Python.mnemu_web" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2aca63e5-406e-41fb-ac6a-129608a38d71" name="Default Changelist" comment="" />
+      <created>1534898618309</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1534898618309</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Formatting, naming, getting project ready for real and not just debug tinkering">
+      <created>1534900712637</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1534900712638</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Many more additions and structuring, still not full production style code yet">
+      <created>1535137961594</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1535137961594</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Hooking up some initial web stuff for testing / debugging">
+      <created>1535422122239</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535422122239</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers>
+      <YouTrack url="https://corefracture.myjetbrains.com/youtrack">
+        <password>df8bdfc3df9edf92df9cdfeedff2df98df8b</password>
+        <username>corefracture</username>
+      </YouTrack>
+    </servers>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1369936" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.23427331" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28524947" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Formatting, naming, getting project ready for real and not just debug tinkering" />
+    <MESSAGE value="Many more additions and structuring, still not full production style code yet" />
+    <MESSAGE value="Hooking up some initial web stuff for testing / debugging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hooking up some initial web stuff for testing / debugging" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ip_filter.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>known_ips.__iter__()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>known_ips.__dict__</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/mnemu_main.py" />
+    <entry file="file://$PROJECT_DIR$/iptrafficclass.py" />
+    <entry file="file://$PROJECT_DIR$/logging.py" />
+    <entry file="file://$PROJECT_DIR$/tc_mgr.py" />
+    <entry file="file://$PROJECT_DIR$/ip_filter_mgr.py" />
+    <entry file="file://C:/Python36/Lib/site-packages/werkzeug/debug/shared/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22344" selection-start-line="4" selection-start-column="22344" selection-end-line="4" selection-end-column="22344" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python36/Lib/site-packages/werkzeug/local.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="344" selection-start-line="344" selection-end-line="344" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python36/Lib/site-packages/werkzeug/datastructures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1319">
+          <caret line="555" selection-start-line="555" selection-end-line="555" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py" />
+    <entry file="file://$PROJECT_DIR$/tc_cmds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <marker date="1536874128661" expanded="true" signature="158:565" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536885990768" expanded="true" signature="288:293" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="1315:2304" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="2336:2449" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="2668:2674" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="2716:2787" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="2814:2892" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="4394:4778" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="4849:7005" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="5233:5879" ph="..." />
+            <marker date="1536885990768" expanded="true" signature="7050:7426" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu_presets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding>
+            <marker date="1536636270746" expanded="true" signature="47:52" ph="..." />
+            <marker date="1536636270746" expanded="true" signature="205:245" ph="..." />
+            <marker date="1536636270746" expanded="true" signature="277:413" ph="..." />
+            <marker date="1536636270746" expanded="true" signature="446:862" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu_web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1536885618344" expanded="true" signature="264:500" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="453:500" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="849:1119" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="1413:1414" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="2206:2842" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="2428:2484" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="2585:2842" ph="..." />
+            <marker date="1536885618344" expanded="true" signature="2992:3050" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="1" selection-start-line="49" selection-start-column="1" selection-end-line="49" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu_debug.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/netem_defs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536635549566" expanded="true" signature="2302:2437" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/netem_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/mnemu_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ip_filter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1536633222732" expanded="true" signature="763:929" ph="..." />
+            <marker date="1536633222732" expanded="true" signature="1337:2456" ph="..." />
+            <marker date="1536633222732" expanded="true" signature="2817:2867" ph="..." />
+            <marker date="1536633222732" expanded="true" signature="4332:5397" ph="..." />
+            <marker date="1536633222732" expanded="true" signature="5093:5397" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/MDL_LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="48" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

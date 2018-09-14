@@ -2,16 +2,15 @@ import json
 
 from flask import Flask
 from flask import request
-
 import mnemu
+from mnemu_presets import MNemuPresets
 from ip_filter import NetemType
 
 app = Flask(__name__, static_folder='web_content')
 mnemu_web = None
-
+mnemu_presets = MNemuPresets()
 
 def get_ip(req):
-    ret_val = None
     if "ip" in req.args.keys():
         ret_val = req.args.get("ip")
     else:
@@ -19,6 +18,11 @@ def get_ip(req):
 
     return ret_val
 
+
+@app.route('/refreshrules')
+def refresh_rules():
+    mnemu_web.refresh_tc()
+    return "true"
 
 # region NETEM SET VALUES
 
@@ -28,10 +32,8 @@ def set_ip_bandwidth(ipnum, val, inorout):
         inbound = True
     else:
         inbound = False
-
     val_set_to = mnemu_web.set_ip_bandwidth(ipnum, val, inbound)
-
-    return "Hello!"
+    return val_set_to
 
 
 @app.route('/netem/set/<ipnum>')
@@ -81,7 +83,9 @@ def get_netem_correlation():
 
 @app.route('/ips/get')
 def get_known_ips():
-    return json.dumps(mnemu_web.get_known_ips())
+    ip_list = mnemu_web.get_known_ips()
+    ip_list.sort()
+    return json.dumps(ip_list)
 
 @app.route('/me')
 def setup_visitng_up():
@@ -91,14 +95,32 @@ def setup_visitng_up():
     ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).as_dict();
     return json.dumps(ret_val)
 
+@app.route('/ip/<ipnum>/clear')
+def clear_ip_rules(ipnum):
+    mnemu_web.clear_ip_rules(ipnum)
+    return "true"
+
+@app.route('/ip/<ipnum>/preset/<presetid>/<inorout>')
+def set_ip_to_preset(ipnum, presetid, inorout):
+    preset = mnemu_presets.get_preset(presetid)
+    if preset is not None:
+        inbound = True if inorout == "in" else False
+        mnemu_web.set_netem_setting_from_preset(ipnum, preset, inbound)
+        return 'true'
+    else:
+        return 'false'
+
 @app.route('/ip/<ipnum>')
 def specific_ip(ipnum):
     return mnemu_web.get_ip_settings(ipnum).web_str()
 
+@app.route("/presets/get")
+def get_presets():
+    return json.dumps(mnemu_presets.get_preset_names())
+
 @app.route('/')
 def hello_world():
     return app.send_static_file('index.html')
-
 
 @app.route('/test')
 def test():

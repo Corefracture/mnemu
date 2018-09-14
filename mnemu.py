@@ -1,12 +1,16 @@
 import logging
-
+from mnemu_presets import MNemuPresets
 import ip_filter
-import cmds
+import time
+import tc_cmds
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
 class MNemu:
+
+    REFRESH_ALLOWED_INTERVAL_SECS = 10
+
     def __init__(self, iface):
         self._master_ip_settings = {}
         self._iface_device = iface
@@ -17,25 +21,59 @@ class MNemu:
         self._next_qdisc_id = 0
 
         self._reset_tc(self._iface_device)
+        self._setup_virtual_device()
         self._setup_ingress_virt_rules()
         self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
 
+        self._presets = MNemuPresets()
+
+        self._rules_last_reset_time = time.time()
 
 
+
+    def refresh_tc(self):
+        self._reset_tc(self._ifb_device)
+        self._setup_ingress_virt_rules()
+        self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
+        self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
+
+        for ip, ip_setting in self._master_ip_settings.items():
+            self._set_ip_settings_in_tc(ip, ip_setting)
+
+
+    def _set_ip_settings_in_tc(self, ip, ip_setting):
+        inbound_id = ip_setting.in_id
+        outbound_id = ip_setting.out_id
+
+        tc_cmds.tc_create_ip_traffic_class(self._iface_device, inbound_id, self._iface_device_root_id,
+                                           ip_setting.get_in_rate())
+        tc_cmds.tc_create_ip_traffic_class(self._ifb_device, outbound_id, self._ifb_device_root_id,
+                                           ip_setting.get_out_rate())
+
+        tc_cmds.tc_create_ip_filter(self._iface_device, ip, self._iface_device_root_id, inbound_id, True)
+        tc_cmds.tc_create_ip_filter(self._ifb_device, ip, self._ifb_device_root_id, outbound_id, False)
+
+        tc_cmds.tc_update_netem_qdisc(self._iface_device, ip, ip_setting.get_netem_inbound_cmd(), inbound_id,
+                                      self._iface_device_root_id)
+        tc_cmds.tc_update_netem_qdisc(self._ifb_device, ip, ip_setting.get_netem_outbound_cmd(), outbound_id,
+                                      self._ifb_device_root_id)
+
+    def _setup_virtual_device(self):
+        tc_cmds.rem_virtual_iface(self._ifb_device)
+        tc_cmds.create_virtual_iface(self._ifb_device)
 
     def _setup_ingress_virt_rules(self):
-        cmds.rem_virtual_iface(self._ifb_device)
-        cmds.create_virtual_iface(self._ifb_device)
         self._reset_tc(self._ifb_device)
-        cmds.tc_add_ingress_qdisc(self._iface_device)
-        cmds.tc_create_virt_redirect_filter(self._iface_device, self._ifb_device)
+        tc_cmds.tc_add_ingress_qdisc(self._iface_device)
+        tc_cmds.tc_create_virt_redirect_filter(self._iface_device, self._ifb_device)
 
     def _add_root_qdisc(self, iface, root_id):
-        cmds.tc_create_root_tokenbucket_qdisc(iface, root_id)
+        tc_cmds.tc_create_root_tokenbucket_qdisc(iface, root_id)
 
     def _reset_tc(self, iface):
-        cmds.tc_reset(iface)
+        tc_cmds.tc_reset(iface)
+        tc_cmds.tc_ingress_reset(iface)
 
     def get_ip_settings(self, ip):
         if ip not in self._master_ip_settings:
@@ -56,35 +94,50 @@ class MNemu:
 
         ip_setting = ip_filter.IPTrafficFilter(ip, inbound_id, outbound_id)
 
-        cmds.tc_create_ip_traffic_class(self._iface_device, inbound_id, self._iface_device_root_id, ip_setting.get_in_rate())
-        cmds.tc_create_ip_traffic_class(self._ifb_device, outbound_id, self._ifb_device_root_id, ip_setting.get_out_rate())
-
-        cmds.tc_create_ip_filter(self._iface_device, ip, self._iface_device_root_id, inbound_id, True)
-        cmds.tc_create_ip_filter(self._ifb_device, ip, self._ifb_device_root_id, outbound_id, False)
-
-        cmds.tc_update_netem_qdisc(self._iface_device, ip, ip_setting.get_netem_inbound_cmd(), inbound_id,
-                                   self._iface_device_root_id)
-        cmds.tc_update_netem_qdisc(self._ifb_device, ip, ip_setting.get_netem_outbound_cmd(), outbound_id,
-                                   self._ifb_device_root_id)
+        self._set_ip_settings_in_tc(ip, ip_setting)
 
         self._master_ip_settings[ip] = ip_setting
 
         return ip_setting
 
+    def set_netem_setting_from_preset(self, ip, netem_settings, inbound=True):
+        if ip in self._master_ip_settings:
+            ip_settings = self._master_ip_settings[ip]
+            ip_settings.set_netem_settings(netem_settings, inbound)
+            if inbound is True:
+                rate_set_to = ip_settings.get_in_rate()
+                tc_cmds.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
+
+            else:
+                rate_set_to = ip_settings.get_out_rate()
+                tc_cmds.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
+
+            self.update_netem_qdisc(ip, inbound)
+
     def clear_ip_rules(self, ip):
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
-            cmds.tc_remove_netem_qdisc(self._iface_device, ip_settings.in_id, self._iface_device_root_id)
-            cmds.tc_remove_netem_qdisc(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id)
-            self.set_ip_bandwidth(ip, 1000000, True)
-            self.set_ip_bandwidth(ip, 1000000, False)
-        return
+            inbound_id = ip_settings.in_id
+            outbound_id = ip_settings.out_id
+            self._master_ip_settings[ip] = ip_filter.IPTrafficFilter(ip, inbound_id, outbound_id)
+            self.update_netem_qdisc(ip, True)
+            self.update_netem_qdisc(ip, False)
 
 
     def set_netem_setting_value(self, ip, setting_type, val, inbound=True):
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
             val_set_to = ip_settings.set_netem_setting(setting_type, val, inbound)
+            self.update_netem_qdisc(ip, inbound)
+        else:
+            return
+            # TODO: cf: Log IP not found
+
+        return val_set_to
+
+    def update_netem_qdisc(self, ip, inbound=True):
+        if ip in self._master_ip_settings:
+            ip_settings = self._master_ip_settings[ip]
             if inbound is True:
                 netem_cmd = ip_settings.get_netem_inbound_cmd()
                 iface = self._iface_device
@@ -96,13 +149,7 @@ class MNemu:
                 qdisc_id = ip_settings.out_id
                 root_id = self._ifb_device_root_id
 
-            cmds.tc_update_netem_qdisc(iface, ip, netem_cmd, qdisc_id, root_id)
-
-        else:
-            return
-            # TODO: cf: Log IP not found
-
-        return val_set_to
+            tc_cmds.tc_update_netem_qdisc(iface, ip, netem_cmd, qdisc_id, root_id)
 
     def get_netem_setting_value(self, ip, setting_type, inbound=True):
         val_set_to = 0
@@ -153,16 +200,14 @@ class MNemu:
     def set_ip_bandwidth(self, ip, rate, inbound=True):
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
-
+            ip_settings.set_bandwidth(rate, inbound)
             if inbound is True:
-                ip_settings.set_in_rate(rate)
-                cmds.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate)
                 rate_set_to = ip_settings.get_in_rate()
-            else:
-                ip_settings.set_out_rate(rate)
-                cmds.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate)
-                rate_set_to = ip_settings.get_out_rate()
+                tc_cmds.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
 
+            else:
+                rate_set_to = ip_settings.get_out_rate()
+                tc_cmds.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
 
         else:
             # TODO: cf: logging around not found IP
