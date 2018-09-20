@@ -7,7 +7,7 @@
 import logging
 import time
 
-import ip_filter
+import ip_settings
 import tc_cmds
 from mnemu_presets import MNemuPresets
 
@@ -99,7 +99,7 @@ class MNemu:
         inbound_id = str(self._next_qdisc_id + 2)
         self._next_qdisc_id = self._next_qdisc_id + 3
 
-        ip_setting = ip_filter.IPTrafficFilter(ip, inbound_id, outbound_id)
+        ip_setting = ip_settings.IPSettings(ip, inbound_id, outbound_id)
 
         self._set_ip_settings_in_tc(ip, ip_setting)
 
@@ -123,10 +123,10 @@ class MNemu:
 
     def clear_ip_rules(self, ip):
         if ip in self._master_ip_settings:
-            ip_settings = self._master_ip_settings[ip]
-            inbound_id = ip_settings.in_id
-            outbound_id = ip_settings.out_id
-            self._master_ip_settings[ip] = ip_filter.IPTrafficFilter(ip, inbound_id, outbound_id)
+            settings = self._master_ip_settings[ip]
+            inbound_id = settings.in_id
+            outbound_id = settings.out_id
+            self._master_ip_settings[ip] = ip_settings.IPSettings(ip, inbound_id, outbound_id)
             self.set_ip_bandwidth(ip, self.get_ip_bandwidth(ip, True), True)
             self.set_ip_bandwidth(ip, self.get_ip_bandwidth(ip, False), False)
             self.update_netem_qdisc(ip, True)

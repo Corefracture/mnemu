@@ -10,7 +10,7 @@ from flask import Flask
 from flask import request
 
 import mnemu
-from ip_filter import NetemType
+from ip_settings import NetemType
 from mnemu_presets import MNemuPresets
 
 app = Flask(__name__, static_folder='web_content')
@@ -99,7 +99,7 @@ def setup_visitng_up():
     ip = get_ip(request)
     ret_val = {}
     ret_val["ip"] = ip
-    ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).as_dict();
+    ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).dict()
     return json.dumps(ret_val)
 
 @app.route('/ip/<ipnum>/clear')
@@ -109,9 +109,11 @@ def clear_ip_rules(ipnum):
 
 @app.route('/ip/<ipnum>/preset/<presetid>/<inorout>')
 def set_ip_to_preset(ipnum, presetid, inorout):
-    preset = mnemu_presets.get_preset(presetid)
+    inbound = True if inorout == "in" else False
+    preset = mnemu_presets.get_preset(presetid) \
+        if inbound else mnemu_presets.get_preset(presetid, True)
+
     if preset is not None:
-        inbound = True if inorout == "in" else False
         mnemu_web.set_netem_setting_from_preset(ipnum, preset, inbound)
         return 'true'
     else:
@@ -119,11 +121,15 @@ def set_ip_to_preset(ipnum, presetid, inorout):
 
 @app.route('/ip/<ipnum>')
 def specific_ip(ipnum):
-    return mnemu_web.get_ip_settings(ipnum).web_str()
+    return json.dumps(mnemu_web.get_ip_settings(ipnum).dict())
 
 @app.route("/presets/get")
 def get_presets():
-    return json.dumps(mnemu_presets.get_preset_names())
+    names = {}
+    names["in"] = mnemu_presets.get_preset_names()
+    names["out"] = mnemu_presets.get_preset_names(True)
+
+    return json.dumps(names)
 
 @app.route('/')
 def hello_world():
@@ -139,7 +145,7 @@ def test():
     ipsettings.set_netem_setting(NetemType.LATENCY, 100)
     ipsettings.set_netem_setting(NetemType.LATENCY, 100, False)
 
-    return ipsettings.get_netem_inbound_cmd() + ipsettings.web_str()
+    return ipsettings.get_netem_inbound_cmd() + json.dumps(ipsettings.dict())
 
 
 if __name__ == '__main__':

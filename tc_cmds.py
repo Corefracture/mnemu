@@ -127,10 +127,10 @@ def tc_update_netem_qdisc(iface, ip, netem_def, qdisc_id, prnt_qdisc_id):
     if netem_def is None or netem_def == "":
         return ""
         #return _execute_task("tc", "qdisc", "add", "dev", iface, "parent", prnt_qdisc_id + ":" + qdisc_id,
-                                     #"handle", qdisc_id + ":", "netem", "limit", "100000")
+        # "handle", qdisc_id + ":", "netem")
     else:
         return _execute_task("tc", "qdisc", "add", "dev", iface, "parent", prnt_qdisc_id + ":" + qdisc_id,
-                                     "handle", qdisc_id + ":", "netem", "limit", "100000", *netem_def.split(" "))
+                             "handle", qdisc_id + ":", "netem", *netem_def.split(" "))
 
 def tc_remove_ingress_qdisc(iface):
     return _execute_task("tc", "qdisc", "del", "dev", iface, "ingress")

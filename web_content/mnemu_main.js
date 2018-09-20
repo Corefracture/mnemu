@@ -41,7 +41,7 @@ function set_presets_to_none() {
 
 function clear_ip_settings(ip) {
     set_presets_to_none();
-    $.get("ip/" + ip + "/clear", function (data) {
+    $.get("ip/" + ip + "/clear", function () {
         request_ip_data(ip);
     });
 }
@@ -91,17 +91,25 @@ $.getJSON("/presets/get", function(data) {
     in_preset_selector = document.getElementById("preset_in");
     out_preset_selector = document.getElementById("preset_out");
     if(in_preset_selector != null && out_preset_selector != null) {
-        opts = "<option>None</option>";
-        $.each(data, function (key, val) {
-            opts += "<option value='" + key + "'>" + val + "</option>";
+        in_opts = "<option>None</option>";
+        out_opts = "<option>None</option>";
+        in_presets = data["in"];
+        out_presets = data["out"];
+
+        $.each(in_presets, function (key, val) {
+            in_opts += "<option value='" + key + "'>" + val + "</option>";
         });
-        in_preset_selector.innerHTML = opts;
-        out_preset_selector.innerHTML = opts;
+
+        $.each(out_presets, function (key, val) {
+            out_opts += "<option value='" + key + "'>" + val + "</option>";
+        });
+
+        in_preset_selector.innerHTML = in_opts;
+        out_preset_selector.innerHTML = out_opts;
     }
 });
 
 $.getJSON("ips/get", function (data) {
-    var items = [];
     known_ips_elem = document.getElementById("ips_sec");
     known_ips_elem.innerHTML = "";
     $.each(data, function (key, val) {
