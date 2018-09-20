@@ -127,6 +127,8 @@ class MNemu:
             inbound_id = ip_settings.in_id
             outbound_id = ip_settings.out_id
             self._master_ip_settings[ip] = ip_filter.IPTrafficFilter(ip, inbound_id, outbound_id)
+            self.set_ip_bandwidth(ip, self.get_ip_bandwidth(ip, True), True)
+            self.set_ip_bandwidth(ip, self.get_ip_bandwidth(ip, False), False)
             self.update_netem_qdisc(ip, True)
             self.update_netem_qdisc(ip, False)
 
