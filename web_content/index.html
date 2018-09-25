@@ -15,13 +15,15 @@
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="web_content/mnemu_main.js"></script>
+    <script src="/web_content/mnemu_main.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:700,regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="shortcut icon" href="/web_content/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css">
-    <link rel="stylesheet" href="web_content/styles.css">
+    <link rel="stylesheet" href="/web_content/styles.css">
     <style>
         #secondGroup
         {
@@ -44,15 +46,51 @@
             padding-top: 4px;
             color: black;
         }
+
+        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+            padding: 10px 20px;
+        }
+
+        .mdl-layout__drawer .mdl-layout-title {
+            padding: 0;
+            text-align: center;
+            line-height: 10px;
+        }
+
+        .mdl-button-align-center {
+            align-self: center;
+
+        }
+
+        .mdl-navtext__link {
+            color: #757575;
+            text-decoration: none;
+            text-align: center;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0;
+            opacity: .87;
+        }
+
     </style>
 </head>
 
-<body>
+<body onload="get_favs()">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 is-casting-shadow">
         <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title" id="selected_ip">Selected IP: None</span>
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button-align-center"
+                    onclick="toggle_fav_ip(selected_id)">
+                <i class="material-icons" id="fav-icon">star_border</i>
+            </button>
+            <button style='float:right' class="mdl-button mdl-js-button mdl-button--icon mdl-button-align-center"
+                    onclick="toggle_ignore_ip(selected_id)">
+                <i class="material-icons" id="ignore-icon">visibility_off</i>
+            </button>
             <div class="mdl-layout-spacer"></div>
             <button class="mdl-button mdl-js-button mdl-button--raised" onclick="clear_ip_settings(selected_id)">
                 Clear IP Settings
@@ -62,26 +100,46 @@
 
 
     <div class="drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50" onload="get_ips()">
+
         <header class="demo-drawer-header">
+
+
+            <span class="mdl-layout-title mdl-layout-center"><img src="/web_content/mnemu.png"/></span>
             <span class="mdl-layout-title">MNemu</span>
 
-            <br/>
-            <br/>
+
         </header>
+        <br/>
+        <div class="mdl-button-align-center">
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button-align-center" onclick="refresh_rules()"
+                    id="netrefresh">
+                <i class="material-icons">settings_backup_restore</i>
+            </button>
+        </div>
+        <br/>
+
         <hr/>
         <div class="mdl-layout-title">This IP:</div>
         <nav class="mdl-navigation" id="this_device_ip">
-            <a class="mdl-navigation__link" href="">10.0.0.1</a>
+            <a class="mdl-navtext__link" href="">10.0.0.1</a>
+
+
         </nav>
         <hr/>
-        <div class="mdl-layout-title">Known IPs:</div>
+        <div class="mdl-layout-title" onclick="collapse_menu_sec('favorite_ips')">Favorite IPs:</div>
+        <nav class="mdl-navigation" id="favorite_ips">
+
+        </nav>
+        <hr/>
+        <div class="mdl-layout-title" onclick="collapse_menu_sec('ips_sec')">Known IPs:</div>
         <nav class="mdl-navigation" id="ips_sec">
             <div class="mdl-layout-spacer"></div>
         </nav>
         <hr/>
-        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="refresh_rules()">
-                Refresh Netstack
-        </button>
+        <div class="mdl-layout-title" onclick="collapse_menu_sec('ips_ignored')">Ignored IPs:</div>
+        <nav class="mdl-navigation" id="ips_ignored">
+            <div class="mdl-layout-spacer"></div>
+        </nav>
 
 
     </div>
@@ -89,7 +147,7 @@
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-grid mn-grid">
             <div class="mdl-layout-spacer"></div>
-            <div class="mdl-cell">
+            <div class="mdl-cell" id="inbound-rules">
                 <h5><b><u>Inbound Traffic</u></b></h5>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -144,7 +202,7 @@
                 </div>
             </div>
 
-            <div class="mdl-cell">
+            <div class="mdl-cell" id="outbound-rules">
                 <h5><b><u>Outbound Traffic</u></b></h5>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <select class="mdl-textfield__input" id="preset_out" name="preset_out"
@@ -203,6 +261,10 @@
     </main>
 </div>
 </body>
+
+<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="netrefresh">
+    Remove and recreate all network classes, filters, and rules. Time restrictred, can only be used every 30 seconds.
+</div>
 
 <!-- Inbound Tooltips -->
 <div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="in_corrupt">

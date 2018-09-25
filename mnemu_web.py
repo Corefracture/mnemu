@@ -42,7 +42,6 @@ def set_ip_bandwidth(ipnum, val, inorout):
     val_set_to = mnemu_web.set_ip_bandwidth(ipnum, val, inbound)
     return val_set_to
 
-
 @app.route('/netem/set/<ipnum>')
 def set_netem_value(ipnum):
 
@@ -94,12 +93,30 @@ def get_known_ips():
     ip_list.sort()
     return json.dumps(ip_list)
 
+
+@app.route('/ip/<ipnum>/ignore')
+def ignore_ip(ipnum):
+    mnemu_web.ignore_ip(ipnum)
+    return "true"
+
+
+@app.route('/ignored')
+def get_ignored():
+    return json.dumps(mnemu_web.ignored_ips)
+
+
+@app.route('/ip/<ipnum>/unignore')
+def unignore_ip(ipnum):
+    mnemu_web.unignore_ip(ipnum)
+    return "true"
+
 @app.route('/me')
 def setup_visitng_up():
     ip = get_ip(request)
     ret_val = {}
     ret_val["ip"] = ip
-    ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).dict()
+    if ip not in mnemu_web.ignored_ips:
+        ret_val["ip_data"] = mnemu_web.get_ip_settings(ip).dict()
     return json.dumps(ret_val)
 
 @app.route('/ip/<ipnum>/clear')
@@ -121,7 +138,10 @@ def set_ip_to_preset(ipnum, presetid, inorout):
 
 @app.route('/ip/<ipnum>')
 def specific_ip(ipnum):
-    return json.dumps(mnemu_web.get_ip_settings(ipnum).dict())
+    if ipnum not in mnemu_web.ignored_ips:
+        return json.dumps(mnemu_web.get_ip_settings(ipnum).dict())
+    else:
+        return "{}"
 
 @app.route("/presets/get")
 def get_presets():

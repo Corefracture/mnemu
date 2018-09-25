@@ -6,6 +6,7 @@
 
 import logging
 import time
+from threading import Lock
 
 import ip_settings
 import tc_cmds
@@ -24,8 +25,9 @@ class MNemu:
         self._ifb_device = "ifb0"
         self._iface_device_root_id = "9998"
         self._ifb_device_root_id = "9999"
-
+        self.locker = Lock()
         self._next_qdisc_id = 0
+        self.ignored_ips = []
 
         self._reset_tc(self._iface_device)
         self._setup_virtual_device()
@@ -45,8 +47,30 @@ class MNemu:
         self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
 
+        self.locker.acquire()
+
         for ip, ip_setting in self._master_ip_settings.items():
+            outbound_id = str(self._next_qdisc_id + 1)
+            inbound_id = str(self._next_qdisc_id + 2)
+            ip_setting.out_id = outbound_id
+            ip_setting.in_id = inbound_id
             self._set_ip_settings_in_tc(ip, ip_setting)
+            self._next_qdisc_id = self._next_qdisc_id + 3
+
+        self.locker.release()
+
+    def ignore_ip(self, ip):
+        if ip not in self.ignored_ips:
+            self.ignored_ips.append(ip)
+            self.clear_ip_rules(ip)
+            if ip in self._master_ip_settings:
+                self._master_ip_settings[ip] = None
+                self._master_ip_settings.pop(ip)
+                self._master_ip_settings = self._master_ip_settings
+
+    def unignore_ip(self, ip):
+        if ip in self.ignored_ips:
+            self.ignored_ips.remove(ip)
 
 
     def _set_ip_settings_in_tc(self, ip, ip_setting):
@@ -95,9 +119,11 @@ class MNemu:
         if ip in self._master_ip_settings:
             return self._master_ip_settings[ip]
 
+        self.locker.acquire()
         outbound_id = str(self._next_qdisc_id + 1)
         inbound_id = str(self._next_qdisc_id + 2)
         self._next_qdisc_id = self._next_qdisc_id + 3
+        self.locker.release()
 
         ip_setting = ip_settings.IPSettings(ip, inbound_id, outbound_id)
 
@@ -225,4 +251,6 @@ class MNemu:
         return rate_set_to
 
     def get_known_ips(self):
-        return list(self._master_ip_settings)
+        items = list(self._master_ip_settings)
+        print(items)
+        return items
