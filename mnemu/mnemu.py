@@ -8,9 +8,8 @@ import logging
 import time
 from threading import Lock
 
-import ip_settings
-import tc_cmds
-from mnemu_presets import MNemuPresets
+from mnemu import tc_cmds as tc, ip_settings
+from mnemu.mnemu_presets import MNemuPresets
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -38,8 +37,6 @@ class MNemu:
         self._presets = MNemuPresets()
 
         self._rules_last_reset_time = time.time()
-
-
 
     def refresh_tc(self):
         self._reset_tc(self._ifb_device)
@@ -77,34 +74,34 @@ class MNemu:
         inbound_id = ip_setting.in_id
         outbound_id = ip_setting.out_id
 
-        tc_cmds.tc_create_ip_traffic_class(self._iface_device, inbound_id, self._iface_device_root_id,
+        tc.tc_create_ip_traffic_class(self._iface_device, inbound_id, self._iface_device_root_id,
                                            ip_setting.get_in_rate())
-        tc_cmds.tc_create_ip_traffic_class(self._ifb_device, outbound_id, self._ifb_device_root_id,
+        tc.tc_create_ip_traffic_class(self._ifb_device, outbound_id, self._ifb_device_root_id,
                                            ip_setting.get_out_rate())
 
-        tc_cmds.tc_create_ip_filter(self._iface_device, ip, self._iface_device_root_id, inbound_id, True)
-        tc_cmds.tc_create_ip_filter(self._ifb_device, ip, self._ifb_device_root_id, outbound_id, False)
+        tc.tc_create_ip_filter(self._iface_device, ip, self._iface_device_root_id, inbound_id, True)
+        tc.tc_create_ip_filter(self._ifb_device, ip, self._ifb_device_root_id, outbound_id, False)
 
-        tc_cmds.tc_update_netem_qdisc(self._iface_device, ip, ip_setting.get_netem_inbound_cmd(), inbound_id,
+        tc.tc_update_netem_qdisc(self._iface_device, ip, ip_setting.get_netem_inbound_cmd(), inbound_id,
                                       self._iface_device_root_id)
-        tc_cmds.tc_update_netem_qdisc(self._ifb_device, ip, ip_setting.get_netem_outbound_cmd(), outbound_id,
+        tc.tc_update_netem_qdisc(self._ifb_device, ip, ip_setting.get_netem_outbound_cmd(), outbound_id,
                                       self._ifb_device_root_id)
 
     def _setup_virtual_device(self):
-        tc_cmds.rem_virtual_iface(self._ifb_device)
-        tc_cmds.create_virtual_iface(self._ifb_device)
+        tc.rem_virtual_iface(self._ifb_device)
+        tc.create_virtual_iface(self._ifb_device)
 
     def _setup_ingress_virt_rules(self):
         self._reset_tc(self._ifb_device)
-        tc_cmds.tc_add_ingress_qdisc(self._iface_device)
-        tc_cmds.tc_create_virt_redirect_filter(self._iface_device, self._ifb_device)
+        tc.tc_add_ingress_qdisc(self._iface_device)
+        tc.tc_create_virt_redirect_filter(self._iface_device, self._ifb_device)
 
     def _add_root_qdisc(self, iface, root_id):
-        tc_cmds.tc_create_root_tokenbucket_qdisc(iface, root_id)
+        tc.tc_create_root_tokenbucket_qdisc(iface, root_id)
 
     def _reset_tc(self, iface):
-        tc_cmds.tc_reset(iface)
-        tc_cmds.tc_ingress_reset(iface)
+        tc.tc_reset(iface)
+        tc.tc_ingress_reset(iface)
 
     def get_ip_settings(self, ip):
         if ip not in self._master_ip_settings:
@@ -139,11 +136,11 @@ class MNemu:
             ip_settings.set_netem_settings(netem_settings, inbound)
             if inbound is True:
                 rate_set_to = ip_settings.get_in_rate()
-                tc_cmds.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
+                tc.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
 
             else:
                 rate_set_to = ip_settings.get_out_rate()
-                tc_cmds.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
+                tc.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
 
             self.update_netem_qdisc(ip, inbound)
 
@@ -184,7 +181,7 @@ class MNemu:
                 qdisc_id = ip_settings.out_id
                 root_id = self._ifb_device_root_id
 
-            tc_cmds.tc_update_netem_qdisc(iface, ip, netem_cmd, qdisc_id, root_id)
+            tc.tc_update_netem_qdisc(iface, ip, netem_cmd, qdisc_id, root_id)
 
     def get_netem_setting_value(self, ip, setting_type, inbound=True):
         val_set_to = 0
@@ -238,11 +235,11 @@ class MNemu:
             ip_settings.set_bandwidth(rate, inbound)
             if inbound is True:
                 rate_set_to = ip_settings.get_in_rate()
-                tc_cmds.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
+                tc.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
 
             else:
                 rate_set_to = ip_settings.get_out_rate()
-                tc_cmds.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
+                tc.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
 
         else:
             # TODO: cf: logging around not found IP

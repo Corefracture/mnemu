@@ -6,7 +6,7 @@
 
 import logging
 
-import ip_settings
+from mnemu import ip_settings
 import mnemu
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)

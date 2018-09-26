@@ -9,9 +9,9 @@ import json
 from flask import Flask
 from flask import request
 
-import mnemu
-from ip_settings import NetemType
-from mnemu_presets import MNemuPresets
+from mnemu.mnemu import MNemu
+from mnemu.ip_settings import NetemType
+from mnemu.mnemu_presets import MNemuPresets
 
 app = Flask(__name__, static_folder='web_content')
 mnemu_web = None
@@ -169,5 +169,6 @@ def test():
 
 
 if __name__ == '__main__':
-    mnemu_web = mnemu.MNemu("ens192")
+
+    mnemu_web = MNemu("ens192")
     app.run(host="0.0.0.0", port=9999)

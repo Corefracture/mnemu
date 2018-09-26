@@ -1,8 +1,12 @@
-// Copyright (C) 2018 Corefracture, Chris Coleman.
-// www.corefracture.com - @corefracture
-//
-// Licensed under the MIT License, https://opensource.org/licenses/MIT
-// See LICENSE.md for more details
+/**
+ * @licence
+ * Copyright (C) 2018 Corefracture, Chris Coleman. All Rights Reserved.
+ * www.corefracture.com - @corefracture
+ *
+ * Licensed under the MIT License, https://opensource.org/licenses/MIT
+ * See LICENSE.md for more details
+**/
+
 
 //cf - LOADS of clean up to do here
 //Lots of code to get features up and running but not organized
@@ -12,6 +16,7 @@ var selected_id = "0.0.0.0";
 var favs = [];
 var ignores = [];
 
+//Load the netem data received for the IP
 function load_ip_data(ip, data) {
     if (data != null) {
         $.each(data, function (key, val) {
@@ -28,6 +33,8 @@ function load_ip_data(ip, data) {
     selected_ip_elem.innerText = "IP: " + ip + "  -  ";
 }
 
+
+//Send request for IP netem data
 function request_ip_data(ip) {
     str_alert = "";
     $.getJSON("/ip/" + ip, function (data) {

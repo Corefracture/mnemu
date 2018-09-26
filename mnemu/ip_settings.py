@@ -7,8 +7,8 @@
 
 import copy
 
-import netem_defs as netem
-from netem_defs import NetemType
+from mnemu import netem_defs as netem
+from mnemu.netem_defs import NetemType
 
 
 class IPSettings:

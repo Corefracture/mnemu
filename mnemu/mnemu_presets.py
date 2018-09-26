@@ -4,7 +4,8 @@
 # Licensed under the MIT License, https://opensource.org/licenses/MIT
 # See LICENSE.md for more details
 
-import netem_defs as NetEm
+from mnemu import netem_defs as NetEm
+
 
 class MNemuPresets:
     def __init__(self):

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,31 +11,21 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="apple-mobile-web-app-title" content="MNemu">
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="/web_content/mnemu_main.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:700,regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="shortcut icon" href="/web_content/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css">
     <link rel="stylesheet" href="/web_content/styles.css">
+
     <style>
-        #secondGroup
-        {
-            display: block;
-        }
-
-        .mn-hspace1 {
-            padding-left:20px;
-            padding-right:20px;
-        }
-
         .mn-grid {
             alignment: center;
         }
@@ -45,10 +36,6 @@
             padding-left: 8px;
             padding-top: 4px;
             color: black;
-        }
-
-        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-            padding: 10px 20px;
         }
 
         .mdl-layout__drawer .mdl-layout-title {
@@ -80,7 +67,8 @@
 <body onload="get_favs()">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 is-casting-shadow">
-        <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
+        <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i
+                class="material-icons"></i></div>
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title" id="selected_ip">Selected IP: None</span>
             <button class="mdl-button mdl-js-button mdl-button--icon mdl-button-align-center"
@@ -100,14 +88,9 @@
 
 
     <div class="drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50" onload="get_ips()">
-
         <header class="demo-drawer-header">
-
-
             <span class="mdl-layout-title mdl-layout-center"><img src="/web_content/mnemu.png"/></span>
             <span class="mdl-layout-title">MNemu</span>
-
-
         </header>
         <br/>
         <div class="mdl-button-align-center">
@@ -117,13 +100,10 @@
             </button>
         </div>
         <br/>
-
         <hr/>
         <div class="mdl-layout-title">This IP:</div>
         <nav class="mdl-navigation" id="this_device_ip">
             <a class="mdl-navtext__link" href="">10.0.0.1</a>
-
-
         </nav>
         <hr/>
         <div class="mdl-layout-title" onclick="collapse_menu_sec('favorite_ips')">Favorite IPs:</div>
@@ -152,7 +132,7 @@
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <select class="mdl-textfield__input" id="preset_in" name="preset_in"
-                    onchange="set_preset(selected_id, this.value, false)">
+                            onchange="set_preset(selected_id, this.value, false)">
                         <option>None</option>
                     </select>
                     <label class="mdl-textfield__label" for="preset_in">Presets:</label>
@@ -206,7 +186,7 @@
                 <h5><b><u>Outbound Traffic</u></b></h5>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <select class="mdl-textfield__input" id="preset_out" name="preset_out"
-                    onchange="set_preset(selected_id, this.value, true)">
+                            onchange="set_preset(selected_id, this.value, true)">
                         <option>None</option>
                     </select>
                     <label class="mdl-textfield__label" for="preset_out">Presets:</label>
