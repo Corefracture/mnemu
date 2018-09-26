@@ -8,11 +8,32 @@ applications under various networking conditions. It was designed as a easy to
 use interface to harness the power of the Linux Kernel **tc netem** commands across 
 multiple clients in real-time.
 
-#### Current State ####
-Currently Mnemu is under very active development. While the core abilities that
+## Current State v0.1.0 ##
+Currently MNemu is under very active development. While the core abilities that
 MNemu was originally designed for are functional, bugs and changes should be 
 expected. A good portion of the codebase will undergo 'cleanup' and polish as 
 we approach a v1.0<br><br>
+Users wishing to utilize MNemu immediately will need to edit the interface name 
+and ip/port combinations in the mnemu_web.py file before launching to ensure the
+application attaches to the correct networking interface on the machine. 
+
+### Quick Start (Requires some Linux knowledge) ###
+**Pre-reqs:**
+1. Linux machine or VM with dual network interfaces 
+2. iproute networking package installed (iproute includes the tc netem tool)
+3. A Route or Bridge between the two network interfaces
+
+**Starting:**
+1. Identify the networking interface name to utilize
+2. Edit the interface name and ip/port numbers in mnemu_web.py at the MNemu init point
+3. Launch with 'python3 mnemu_web.py'
+4. Visit the page at the IP/Port combination used and begin manipulating network 
+conditions for any devices that have visited the page
+5. Manually add and manipulate devices by visting 0.0.0.0:0/ip/1.2.3.4 where 1.2.3.4 is
+the IP you wish to add. You can then return to the home MNemu page and change the
+networking conditions for that IP
+
+<br>
 
 
 **MNemu Web App**
