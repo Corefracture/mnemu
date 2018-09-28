@@ -40,12 +40,17 @@ class MNemu:
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
 
     def refresh_tc(self):
+        self._reset_tc(self._iface_device)
         self._reset_tc(self._ifb_device)
         self._setup_virtual_device()
         self._setup_ingress_virt_rules()
         self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
-
+        # Hacky to do it this way, but certain versions of tc will remove the entire
+        # filter list for a device instead of a single filter, so refreshing all is
+        # the fail safe.
+        self.clear_tc_filters()
+        self.recreate_tc_filters()
         self.locker.acquire()
         for ip, ip_setting in self._master_ip_settings.items():
             outbound_id = str(self._next_qdisc_id + 1)
@@ -55,6 +60,15 @@ class MNemu:
             self._set_ip_settings_in_tc(ip, ip_setting)
             self._next_qdisc_id = self._next_qdisc_id + 3
         self.locker.release()
+
+    def clear_tc_filters(self):
+        tc.tc_remove_filters(self._iface_device, self._iface_device_root_id)
+        tc.tc_remove_filters(self._ifb_device, self._ifb_device_root_id)
+
+    def recreate_tc_filters(self):
+        for ip, ip_setting in self._master_ip_settings.items():
+            tc.tc_create_ip_filter(self._iface_device, ip, self._iface_device_root_id, ip_setting.in_id, True)
+            tc.tc_create_ip_filter(self._ifb_device, ip, self._ifb_device_root_id, ip_setting.out_id, False)
 
     def ignore_ip(self, ip):
         if ip not in self.ignored_ips:
@@ -68,6 +82,12 @@ class MNemu:
     def unignore_ip(self, ip):
         if ip in self.ignored_ips:
             self.ignored_ips.remove(ip)
+            #Hacky to do it this way, but certain versions of tc will remove the entire
+            #filter list for a device instead of a single filter, so refreshing all is
+            #the fail safe.
+            self.clear_tc_filters()
+            self.recreate_tc_filters()
+            self.add_new_ip(ip)
 
 
     def _set_ip_settings_in_tc(self, ip, ip_setting):

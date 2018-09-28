@@ -90,6 +90,13 @@ def tc_change_ip_traffic_class(iface, classid, parent_qdiscid, rate_kbit):
                                      classid, "htb", "rate", str(rate_kbit) + "kbit")
 
 
+def tc_remove_filters(iface, prnt_class_id):
+    prnt_class_id = prnt_class_id + ":"
+
+    stdout, stderr = _execute_task("tc", "filter", "del", "dev", iface, "parent", prnt_class_id)
+
+    return
+
 def tc_create_incoming_filter(iface, ip, prnt_qdisc_id, prnt_class_id, ip_is_dst=False):
     prnt_qdisc_id = prnt_qdisc_id + ":"
     prnt_class_id = prnt_qdisc_id + prnt_class_id
