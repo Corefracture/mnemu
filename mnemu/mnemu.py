@@ -27,25 +27,26 @@ class MNemu:
         self.locker = Lock()
         self._next_qdisc_id = 0
         self.ignored_ips = []
+        self._presets = MNemuPresets()
+        self._rules_last_reset_time = time.time()
 
+        self.init_work()
+
+    def init_work(self):
         self._reset_tc(self._iface_device)
         self._setup_virtual_device()
         self._setup_ingress_virt_rules()
         self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
 
-        self._presets = MNemuPresets()
-
-        self._rules_last_reset_time = time.time()
-
     def refresh_tc(self):
         self._reset_tc(self._ifb_device)
+        self._setup_virtual_device()
         self._setup_ingress_virt_rules()
         self._add_root_qdisc(self._ifb_device, self._ifb_device_root_id)
         self._add_root_qdisc(self._iface_device, self._iface_device_root_id)
 
         self.locker.acquire()
-
         for ip, ip_setting in self._master_ip_settings.items():
             outbound_id = str(self._next_qdisc_id + 1)
             inbound_id = str(self._next_qdisc_id + 2)
@@ -53,7 +54,6 @@ class MNemu:
             ip_setting.in_id = inbound_id
             self._set_ip_settings_in_tc(ip, ip_setting)
             self._next_qdisc_id = self._next_qdisc_id + 3
-
         self.locker.release()
 
     def ignore_ip(self, ip):
@@ -123,9 +123,7 @@ class MNemu:
         self.locker.release()
 
         ip_setting = ip_settings.IPSettings(ip, inbound_id, outbound_id)
-
         self._set_ip_settings_in_tc(ip, ip_setting)
-
         self._master_ip_settings[ip] = ip_setting
 
         return ip_setting
@@ -162,7 +160,7 @@ class MNemu:
             val_set_to = ip_settings.set_netem_setting(setting_type, val, inbound)
             self.update_netem_qdisc(ip, inbound)
         else:
-            return
+            val_set_to = -1
             # TODO: cf: Log IP not found
 
         return val_set_to
@@ -180,27 +178,24 @@ class MNemu:
                 iface = self._ifb_device
                 qdisc_id = ip_settings.out_id
                 root_id = self._ifb_device_root_id
-
             tc.tc_update_netem_qdisc(iface, ip, netem_cmd, qdisc_id, root_id)
 
     def get_netem_setting_value(self, ip, setting_type, inbound=True):
-        val_set_to = 0
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
             val_set_to = ip_settings.get_netem_setting(setting_type, inbound)
         else:
-            return
+            val_set_to = -1
             # TODO: cf: Log IP not found
 
         return val_set_to
 
     def set_netem_setting_corr(self, ip, setting_type, corr_val, inbound=True):
-        corr_set_to = 0
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
             corr_set_to = ip_settings.set_netem_setting_corr(setting_type, corr_val, inbound)
         else:
-            return
+            corr_set_to = -1
             # TODO: cf: Log IP not found
 
         return corr_set_to
@@ -208,15 +203,14 @@ class MNemu:
     def get_netem_setting_corr(self, ip, setting_type, inbound=True):
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
-            corr_set_to = ip_settings.get_netem_setting_corr(setting_type, inbound)
+            corr_val = ip_settings.get_netem_setting_corr(setting_type, inbound)
         else:
-            return
+            corr_val = -1
             # TODO: cf: Log IP not found
 
-        return corr_set_to
+        return corr_val
 
     def get_ip_bandwidth(self, ip, inbound=True):
-        rate = 0
         if ip in self._master_ip_settings:
             ip_settings = self._master_ip_settings[ip]
             if inbound is True:
@@ -224,23 +218,22 @@ class MNemu:
             else:
                 rate = ip_settings.get_out_rate()
         else:
+            rate = -1
             # TODO: cf: logging around not found IP
-            return
 
         return rate
 
     def set_ip_bandwidth(self, ip, rate, inbound=True):
         if ip in self._master_ip_settings:
-            ip_settings = self._master_ip_settings[ip]
-            ip_settings.set_bandwidth(rate, inbound)
+            ip_sets = self._master_ip_settings[ip]
+            ip_sets.set_bandwidth(rate, inbound)
             if inbound is True:
-                rate_set_to = ip_settings.get_in_rate()
-                tc.tc_change_ip_traffic_class(self._iface_device, ip_settings.in_id, self._iface_device_root_id, rate_set_to)
-
+                rate_set_to = ip_sets.get_in_rate()
+                tc.tc_change_ip_traffic_class(self._iface_device, ip_sets.in_id, self._iface_device_root_id,
+                                              rate_set_to)
             else:
-                rate_set_to = ip_settings.get_out_rate()
-                tc.tc_change_ip_traffic_class(self._ifb_device, ip_settings.out_id, self._ifb_device_root_id, rate_set_to)
-
+                rate_set_to = ip_sets.get_out_rate()
+                tc.tc_change_ip_traffic_class(self._ifb_device, ip_sets.out_id, self._ifb_device_root_id, rate_set_to)
         else:
             # TODO: cf: logging around not found IP
             return
@@ -248,6 +241,4 @@ class MNemu:
         return rate_set_to
 
     def get_known_ips(self):
-        items = list(self._master_ip_settings)
-        print(items)
-        return items
+        return list(self._master_ip_settings)

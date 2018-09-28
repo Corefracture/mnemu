@@ -3,3 +3,8 @@
 #
 # Licensed under the MIT License, https://opensource.org/licenses/MIT
 # See LICENSE.md for more details
+
+
+class MNemuScriptMgr:
+    def __init__(self):
+        self._master_scripts = []

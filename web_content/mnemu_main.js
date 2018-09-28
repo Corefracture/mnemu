@@ -47,7 +47,6 @@ function request_ip_data(ip) {
 
 function toggle_ignore_icon(ip) {
     ignore_icon_elem = document.getElementById('ignore-icon');
-
     if (ignores.includes(ip)) {
         ignore_icon_elem.innerText = "visibility_on";
         $('#outbound-rules').find('*').hide();
@@ -61,7 +60,6 @@ function toggle_ignore_icon(ip) {
 
 function toggle_fav_icon(ip) {
     fav_icon_elem = document.getElementById('fav-icon');
-
     if (favs.includes(ip)) {
         fav_icon_elem.innerText = "star";
     } else {
@@ -74,7 +72,6 @@ function get_favs() {
     if (favsCook != null) {
         favs = JSON.parse(favsCook);
     }
-
     populate_favs();
 }
 
@@ -194,7 +191,6 @@ function set_netem_setting(ip, type_id, val, outbound) {
 }
 
 function add_ip_to_menu_sec(elem, ip) {
-    //add_ip_to_menu_sec(elem, ip);
     elem.innerHTML += "<a class=\"mdl-navtext__link mdl-navigation__link\" href=\"javascript:request_ip_data(\'" + ip + "\');\" id=\"buff\">" + ip + "</a>";
 }
 
@@ -214,59 +210,59 @@ function get_ignored_ips(callback = null) {
     });
 }
 
-function get_known_ips() {
+function get_known_ips(callback = null) {
     $.getJSON("/ips/get", function (data) {
         ips_sec_elem = document.getElementById("ips_sec");
         ips_sec_elem.innerHTML = "";
         $.each(data, function (key, val) {
-            //bod.innerHTML += "<a class=\"mdl-navigation__link\" href=\"javascript:report_ip_clicked_on(\'" + val + "\');\" id=\"buff\">"+ val + "</a>";
-            //known_ips_elem.innerHTML += "<a class=\"mdl-navtext__link mdl-navigation__link\" href=\"javascript:request_ip_data(\'" + val + "\');\" id=\"buff\">"+ val + "</a>";
             add_ip_to_menu_sec(ips_sec_elem, val);
         });
+
+        if (callback != null) {
+            callback();
+        }
+    });
+}
+
+function fresh_visit() {
+    $.getJSON("/me", function (data) {
+        ip = data["ip"];
+        ipdata = data["ip_data"];
+        this_ip_elem = document.getElementById("this_device_ip");
+        this_ip_elem.innerText = "";
+        add_ip_to_menu_sec(this_ip_elem, ip);
+        load_ip_data(ip, ipdata);
+    });
+}
+
+function get_presets() {
+    $.getJSON("/presets/get", function (data) {
+        in_preset_selector = document.getElementById("preset_in");
+        out_preset_selector = document.getElementById("preset_out");
+        if (in_preset_selector != null && out_preset_selector != null) {
+            in_opts = "<option>None</option>";
+            out_opts = "<option>None</option>";
+            in_presets = data["in"];
+            out_presets = data["out"];
+
+            $.each(in_presets, function (key, val) {
+                in_opts += "<option value='" + key + "'>" + val + "</option>";
+            });
+
+            $.each(out_presets, function (key, val) {
+                out_opts += "<option value='" + key + "'>" + val + "</option>";
+            });
+
+            in_preset_selector.innerHTML = in_opts;
+            out_preset_selector.innerHTML = out_opts;
+        }
     });
 
 }
 
-$.getJSON("/me", function (data) {
-    ip = data["ip"];
-    ipdata = data["ip_data"];
 
-    this_ip_elem = document.getElementById("this_device_ip");
-
-    //this_ip_elem.innerHTML = "<div class='mdl-navigation__link'>" +
-    //"<a href='javascript:request_ip_data('" + ip + "');\' id='buff'>"+ ip + "</a>" +
-    //"<button class='mdl-button mdl-js-button mdl-button--icon mdl-button-align-center' onclick='refresh_rules()'><i class='material-icons'>star_boarder</i></button></div>";
-
-    this_ip_elem.innerText = "";
-    //this_ip_elem.innerHTML = "<a class='mdl-navtext__link mdl-navigation__link' style='line-height:32px;'" +
-    //" href=\"javascript:request_ip_data('" + ip + "');\" id='buff'>"+ ip + "</a>";
-
-    add_ip_to_menu_sec(this_ip_elem, ip);
-    load_ip_data(ip, ipdata);
-});
-
-$.getJSON("/presets/get", function(data) {
-    in_preset_selector = document.getElementById("preset_in");
-    out_preset_selector = document.getElementById("preset_out");
-    if(in_preset_selector != null && out_preset_selector != null) {
-        in_opts = "<option>None</option>";
-        out_opts = "<option>None</option>";
-        in_presets = data["in"];
-        out_presets = data["out"];
-
-        $.each(in_presets, function (key, val) {
-            in_opts += "<option value='" + key + "'>" + val + "</option>";
-        });
-
-        $.each(out_presets, function (key, val) {
-            out_opts += "<option value='" + key + "'>" + val + "</option>";
-        });
-
-        in_preset_selector.innerHTML = in_opts;
-        out_preset_selector.innerHTML = out_opts;
-    }
-});
-
+fresh_visit();
+get_presets();
 get_known_ips();
 get_ignored_ips();
 

@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2aca63e5-406e-41fb-ac6a-129608a38d71" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mnemu/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mnemu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mnemu.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mnemu/mnemu_scriptmgr.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ip_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/ip_settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mnemu.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/mnemu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mnemu_debug.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/mnemu_debug.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mnemu_presets.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/mnemu_presets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mnemu/mnemu.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/mnemu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mnemu/netem_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/mnemu_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mnemu_web.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu_web.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netem_defs.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/netem_defs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netem_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/netem_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tc_cmds.py" beforeDir="false" afterPath="$PROJECT_DIR$/mnemu/tc_cmds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_content/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web_content/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web_content/mnemu_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/web_content/mnemu_main.js" afterDir="false" />
     </list>
     <ignored path="F:\Code\Personal\mnemu\.idea\shelf/" />
@@ -33,13 +25,14 @@
     <session id="1641863476">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="4" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,8 +42,8 @@
           <entry key="css" value="3" />
           <entry key="html" value="5" />
           <entry key="js" value="6" />
-          <entry key="md" value="2" />
-          <entry key="py" value="37" />
+          <entry key="md" value="3" />
+          <entry key="py" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -58,18 +51,18 @@
           <entry key="CSS" value="3" />
           <entry key="HTML" value="5" />
           <entry key="JavaScript" value="6" />
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="37" />
+          <entry key="Python" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="LICENSE" value="13" />
-          <entry key="dummy" value="127" />
+          <entry key="dummy" value="132" />
           <entry key="html" value="6012" />
-          <entry key="js" value="6716" />
-          <entry key="py" value="25207" />
+          <entry key="js" value="6838" />
+          <entry key="py" value="28675" />
           <entry key="txt" value="714" />
           <entry key="youtrack" value="8" />
         </counts>
@@ -77,9 +70,9 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="6016" />
-          <entry key="JavaScript" value="6712" />
-          <entry key="PLAIN_TEXT" value="854" />
-          <entry key="Python" value="25207" />
+          <entry key="JavaScript" value="6834" />
+          <entry key="PLAIN_TEXT" value="859" />
+          <entry key="Python" value="28675" />
           <entry key="YouTrack" value="8" />
         </counts>
       </usages-collector>
@@ -130,8 +123,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mnemu/tc_cmds.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+                <state relative-caret-position="291">
+                  <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -139,10 +132,11 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mnemu/mnemu.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1462">
-                  <caret line="86" column="32" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="32" />
+                <state relative-caret-position="187">
+                  <caret line="116" column="47" lean-forward="true" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
                   <folding>
                     <element signature="e#196#210#0" expanded="true" />
+                    <marker date="1538013595886" expanded="true" signature="956:1233" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -151,19 +145,47 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mnemu/mnemu_presets.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
+                <state relative-caret-position="51">
                   <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mnemu_web.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="564">
-                  <caret line="172" column="16" selection-start-line="172" selection-start-column="16" selection-end-line="172" selection-end-column="16" />
+                <state relative-caret-position="336">
+                  <caret line="101" column="17" lean-forward="true" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="17" />
                   <folding>
-                    <element signature="e#196#207#0" expanded="true" />
+                    <element signature="n#!!doc" />
+                    <element signature="e#497#630#0" />
+                    <element signature="e#879#1042#0" />
+                    <element signature="e#1674#1772#0" />
+                    <element signature="e#2288#2337#0" />
+                    <element signature="e#2442#2756#0" />
+                    <element signature="e#2638#2723#0" />
+                    <element signature="e#2303#2388#0" />
+                    <element signature="e#3080#3120#0" />
+                    <element signature="e#3157#3288#0" />
+                    <element signature="e#3160#3267#0" />
+                    <element signature="e#2756#2891#0" />
+                    <element signature="e#2747#2944#0" />
+                    <element signature="e#3822#3862#0" />
+                    <element signature="e#3893#3914#0" />
+                    <element signature="e#851#1014#0" />
+                    <element signature="e#1082#1312#0" />
+                    <element signature="e#1379#1640#0" />
+                    <element signature="e#1753#1955#0" />
+                    <element signature="e#2022#2223#0" />
+                    <element signature="e#2452#2496#0" />
+                    <element signature="e#2545#2585#0" />
+                    <element signature="e#2651#2697#0" />
+                    <element signature="e#3007#3056#0" />
+                    <element signature="e#3164#3478#0" />
+                    <element signature="e#3360#3445#0" />
+                    <element signature="e#3534#3669#0" />
+                    <element signature="e#3909#3950#0" />
+                    <element signature="e#4459#4525#0" />
                   </folding>
                 </state>
               </provider>
@@ -177,8 +199,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mnemu/mnemu_debug.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="5" selection-start-line="5" selection-end-line="5" />
+                <state relative-caret-position="425">
+                  <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
                 </state>
               </provider>
             </entry>
@@ -187,16 +209,41 @@
             <entry file="file://$PROJECT_DIR$/mnemu/netem_defs.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="374">
-                  <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+                  <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/mnemu/mnemu_script.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="368">
+                  <caret line="69" column="4" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="4" />
+                  <folding>
+                    <element signature="e#196#207#0" expanded="true" />
+                    <marker date="1538102199617" expanded="true" signature="234:235" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="723:1538" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="724:729" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="751:821" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="850:907" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="1315:1355" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="1560:1565" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="1560:1666" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="1684:1689" ph="..." />
+                    <marker date="1538102199617" expanded="true" signature="1957:1982" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/mnemu/netem_script.py">
+            <entry file="file://$PROJECT_DIR$/mnemu/mnemu_scriptmgr.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="5" selection-start-line="5" selection-end-line="5" />
+                <state relative-caret-position="102">
+                  <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+                  <folding>
+                    <marker date="1538102182420" expanded="true" signature="255:260" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -205,20 +252,20 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/web_content/mnemu_main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="224">
-                  <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+                <state relative-caret-position="476">
+                  <caret line="28" column="11" lean-forward="true" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/mnemu/ip_settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1275">
-                  <caret line="75" selection-start-line="75" selection-end-line="75" />
+                <state relative-caret-position="578">
+                  <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
                   <folding>
                     <element signature="e#197#208#0" expanded="true" />
                   </folding>
@@ -261,9 +308,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ban</find>
-      <find>bandwi</find>
-      <find>button</find>
       <find>presets/get</find>
       <find>preset</find>
       <find>iptraffi</find>
@@ -291,6 +335,9 @@
       <find>unif</find>
       <find>load</find>
       <find>tc_cmds</find>
+      <find>refres</find>
+      <find>bandwid</find>
+      <find>set_ip_bandwidth</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;tc&quot;</replace>
@@ -324,9 +371,13 @@
         <option value="$PROJECT_DIR$/tc_cmds.py" />
         <option value="$PROJECT_DIR$/ip_settings.py" />
         <option value="$PROJECT_DIR$/web_content/index.html" />
-        <option value="$PROJECT_DIR$/web_content/mnemu_main.js" />
         <option value="$PROJECT_DIR$/mnemu.py" />
+        <option value="$PROJECT_DIR$/web_content/mnemu_main.js" />
+        <option value="$PROJECT_DIR$/mnemu/mnemu.py" />
         <option value="$PROJECT_DIR$/mnemu_web.py" />
+        <option value="$PROJECT_DIR$/mnemu/netem_script.py" />
+        <option value="$PROJECT_DIR$/mnemu/mnemu_scriptmgr.py" />
+        <option value="$PROJECT_DIR$/mnemu/mnemu_script.py" />
       </list>
     </option>
   </component>
@@ -336,18 +387,17 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="240" />
-    <option name="y" value="33" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
     <option name="width" value="1932" />
-    <option name="height" value="1047" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -368,12 +418,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/mnemu" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.SQL" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -556,10 +607,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49924126" visible="true" weight="0.10930048" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49924126" visible="true" weight="0.1108742" />
       <window_info id="Structure" order="1" sideWeight="0.5007587" side_tool="true" weight="0.1369936" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -570,7 +621,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.06941432" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.32917318" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.18025751" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.18004338" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3299532" />
@@ -611,8 +662,13 @@
       <breakpoints>
         <line-breakpoint type="javascript">
           <url>file://$PROJECT_DIR$/web_content/mnemu_main.js</url>
-          <line>271</line>
+          <line>267</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mnemu/ip_settings.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -658,22 +714,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mnemu/mnemu_presets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="51">
           <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/mnemu_debug.py">
+    <entry file="file://$PROJECT_DIR$/mnemu/netem_defs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/netem_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="374">
+          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -685,6 +734,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="51">
@@ -693,62 +747,131 @@
           <second_editor />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/ip_settings.py">
+    <entry file="file://$PROJECT_DIR$/mnemu/mnemu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="187">
+          <caret line="116" column="47" lean-forward="true" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
           <folding>
-            <element signature="e#197#208#0" expanded="true" />
+            <element signature="e#196#210#0" expanded="true" />
+            <marker date="1538013595886" expanded="true" signature="956:1233" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/tc_cmds.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web_content/mnemu_main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/netem_defs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mnemu/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/mnemu/mnemu.py">
+    <entry file="file://$PROJECT_DIR$/mnemu/mnemu_debug.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="86" column="32" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="32" />
-          <folding>
-            <element signature="e#196#210#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/mnemu_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="11" lean-forward="true" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu/tc_cmds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mnemu_web.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="172" column="16" selection-start-line="172" selection-start-column="16" selection-end-line="172" selection-end-column="16" />
+        <state relative-caret-position="336">
+          <caret line="101" column="17" lean-forward="true" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="17" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#497#630#0" />
+            <element signature="e#879#1042#0" />
+            <element signature="e#1674#1772#0" />
+            <element signature="e#2288#2337#0" />
+            <element signature="e#2442#2756#0" />
+            <element signature="e#2638#2723#0" />
+            <element signature="e#2303#2388#0" />
+            <element signature="e#3080#3120#0" />
+            <element signature="e#3157#3288#0" />
+            <element signature="e#3160#3267#0" />
+            <element signature="e#2756#2891#0" />
+            <element signature="e#2747#2944#0" />
+            <element signature="e#3822#3862#0" />
+            <element signature="e#3893#3914#0" />
+            <element signature="e#851#1014#0" />
+            <element signature="e#1082#1312#0" />
+            <element signature="e#1379#1640#0" />
+            <element signature="e#1753#1955#0" />
+            <element signature="e#2022#2223#0" />
+            <element signature="e#2452#2496#0" />
+            <element signature="e#2545#2585#0" />
+            <element signature="e#2651#2697#0" />
+            <element signature="e#3007#3056#0" />
+            <element signature="e#3164#3478#0" />
+            <element signature="e#3360#3445#0" />
+            <element signature="e#3534#3669#0" />
+            <element signature="e#3909#3950#0" />
+            <element signature="e#4459#4525#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/-1184660488/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="228" column="4" selection-start-line="228" selection-start-column="4" selection-end-line="228" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu/ip_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
+          <folding>
+            <element signature="e#197#208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu/mnemu_scriptmgr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <marker date="1538102182420" expanded="true" signature="255:260" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnemu/mnemu_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="69" column="4" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="4" />
           <folding>
             <element signature="e#196#207#0" expanded="true" />
+            <marker date="1538102199617" expanded="true" signature="234:235" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="723:1538" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="724:729" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="751:821" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="850:907" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="1315:1355" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="1560:1565" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="1560:1666" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="1684:1689" ph="..." />
+            <marker date="1538102199617" expanded="true" signature="1957:1982" ph="..." />
           </folding>
         </state>
       </provider>
