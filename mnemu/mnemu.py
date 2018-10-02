@@ -7,9 +7,8 @@
 import logging
 import time
 from threading import Lock
-
-from mnemu import tc_cmds as tc, ip_settings
-from mnemu.mnemu_presets import MNemuPresets
+from . import tc_cmds as tc, ip_settings
+from .mnemu_presets import MNemuPresets
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -50,8 +49,8 @@ class MNemu:
         # filter list for a device instead of a single filter, so refreshing all is
         # the fail safe.
         self.clear_tc_filters()
-        self.recreate_tc_filters()
         self.locker.acquire()
+        self._next_qdisc_id = 0
         for ip, ip_setting in self._master_ip_settings.items():
             outbound_id = str(self._next_qdisc_id + 1)
             inbound_id = str(self._next_qdisc_id + 2)

@@ -4,20 +4,22 @@
 # Licensed under the MIT License, https://opensource.org/licenses/MIT
 # See LICENSE.md for more details
 
-import json
+
 import random
 import time
+import json
 
 
 class MNemuScriptRuleSetting:
     def __init__(self, base_val=None, high_val=None, eval_interval=None, random_update=None,
-                 update_prob=None, json_data_load=None):
+                 update_prob=None, active_prob=None, json_data_load=None):
         if json_data_load is None:
             self._base_val = base_val
             self._high_val = high_val
             self._eval_interval = eval_interval
             self._random_update = random_update
             self._update_prob = update_prob
+            self._active_prob = active_prob
         else:
             self.__dict__ = json_data_load
 
@@ -49,36 +51,30 @@ class MNemuScriptRuleSetting:
         return json.dumps(self.__dict__)
 
 
-class MNemuRuleTiming:
-    def __init__(self):
+class MNemuScriptRuleTiming:
+    def __init__(self, start_secs=None, end_secs=None, active_dur_secs=None, repeat_delay_secs=None,
+                 repeat_count=None, active_dir_rnd_inc=None, json_data_load=None):
+        if json_data_load is None:
+            self._start_secs = start_secs
+            self._end_secs = end_secs
+            self._active_dur_secs = active_dur_secs
+            self._active_dur_rnd_inc = active_dir_rnd_inc
+            self._repeat_delay_secs = repeat_delay_secs
+            self._repeat_count = repeat_count
+        else:
+            self.__dict__ = json_data_load
+
         return
 
     def to_json(self):
         return json.dumps(self.__dict__)
 
 
-class MNemuScript:
-    def __init__(self, json_data_str=None):
-        self._rule_settings = []
-        self._rule_timings = []
-        self._repeats = False
-
-        if json_data_str is not None:
-            self._load_from_json(json_data_str)
-
-    def _load_from_json(self, json_data_str):
+class MNemuScriptRuleState:
+    def __init__(self):
+        self.current_val = 0
+        self.last_activate = time.time()
+        self.start_time = time.time()
+        self.is_active = False
+        self.last_eval = time.time()
         return
-
-    def to_json(self):
-        data = {}
-        data["repeats"] = str(self._repeats)
-        rule_data = []
-        timing_data = []
-        for rule in self._rule_settings:
-            rule_data.append(rule.to_json())
-        data["rules"] = json.dumps(rule_data)
-        for timing in self._rule_timings:
-            timing_data.append(timing.to_json())
-        data["timing"] = json.dumps((timing_data))
-
-        return json.dumps(data)

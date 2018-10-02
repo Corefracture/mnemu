@@ -1,0 +1,161 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>MNemu</title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MNemu">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/web_content/mnemu_main.js"></script>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:700,regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="shortcut icon" href="/web_content/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-deep_purple.min.css">
+    <link rel="stylesheet" href="/web_content/styles.css">
+
+    <style>
+        .mn-grid {
+            alignment: center;
+        }
+
+        .mn-grid .mdl-cell {
+            box-sizing: border-box;
+            background-color: #e0e0e0;
+            padding-left: 8px;
+            padding-top: 4px;
+            color: black;
+            width: calc(75% - 16px);
+        }
+
+        .mdl-layout__drawer .mdl-layout-title {
+            padding: 0;
+            text-align: center;
+            line-height: 10px;
+        }
+
+        .mdl-checkbox_auto_width {
+            width: auto;
+        }
+        .mdl-button-align-center {
+            align-self: center;
+        }
+
+        .hspacer_small {
+            width: 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .mdl-navtext__link {
+            color: #757575;
+            text-decoration: none;
+            text-align: center;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0;
+            opacity: .87;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <header class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600 is-casting-shadow">
+        <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i
+                class="material-icons"></i></div>
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title" id="selected_script">Selected Script: None</span>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </header>
+
+
+    <div class="drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+            <span class="mdl-layout-title mdl-layout-center"><img src="/web_content/mnemu.png"/></span>
+            <span class="mdl-layout-title">MNemu Script Editor</span>
+        </header>
+        <br/>
+        <hr/>
+        <div class="mdl-layout-title">Scripts</div>
+        <nav class="mdl-navigation" id="scripts_list">
+            <div class="mdl-layout-spacer"></div>
+        </nav>
+
+
+    </div>
+    <main class="mdl-layout__content ">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-grid mn-grid">
+
+
+            <div class="mdl-cell" id="outbound-rules">
+                <h5><b><u>Script Options</u></b></h5>
+
+                <div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="script_name"
+                               onchange="">
+                        <label class="mdl-textfield__label" for="script_name">Script Name</label>
+                        <span class="mdl-textfield__error">Required!</span>
+                    </div>
+                    <label class="hspacer_small"></label>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="script_tags"
+                               onchange="">
+                        <label class="mdl-textfield__label" for="script_tags">Script Tags (Comma Separated)</label>
+                        <span class="mdl-textfield__error">Required!</span>
+                    </div>
+<label class="hspacer_small"></label>
+                    <label class="mdl-checkbox mdl-checkbox_auto_width mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                      <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                      <span class="mdl-checkbox__label">Script Repeats?</span>
+                    </label>
+                </div>
+
+            </div>
+            <div class="mdl-layout-spacer"></div>
+
+
+            <div class="mdl-cell" id="script_add-rem_rules">
+                <h5><b><u>Add/Remove Script Rules</u></b></h5>
+
+
+
+            </div>
+
+        </div>
+    </main>
+    <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__right-section">
+            <div class="mdl-logo"><img src="/web_content/mnemu.png" style="height:24px"/> <a
+                    href="https://github.com/Corefracture/mnemu" target="_blank">MNemu</a></div>
+
+            <ul class="mdl-mini-footer__link-list">
+                <li>- · - (C) 2018 - <a href="https://www.corefracture.com" target="_blank">Corefracture,</a> cf - · -
+                    MIT License
+                </li>
+            </ul>
+
+        </div>
+    </footer>
+</div>
+</body>
+
+
+</html>
