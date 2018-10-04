@@ -14,6 +14,7 @@ class MNemuScript:
         self._rule_settings = []
         self._rule_timings = []
         self._rule_states = []
+        self._rules = []
         self._repeats = False
         self._name = ""
         self._tags = []
@@ -23,31 +24,62 @@ class MNemuScript:
 
     def _load_from_json(self, json_data_str):
         saved = json.loads(json_data_str)
-        repeats = saved["repeats"]
+        self._repeats = saved["repeats"]
+        self._name = saved["name"]
+        self._tags = saved["tags"]
+
         rules_data_raw = json.loads(saved["rules"])
-        rules_timing_raw = json.loads(saved["timing"])
-        if(len(rules_data_raw) != len(rules_timing_raw)):
-            raise Exception("Rules data and rules timing do not match!")
-            #TODO: cf: More logging and handeling here.
-        self._rule_settings = []
-        self._rule_timings = []
-        for x in range(0, len(rules_data_raw)):
-            self._rule_settings.append(
-                MNemuScriptRuleSetting(json_data_load=json.loads(rules_data_raw[x])))
-            self._rule_timings.append(
-                MNemuScriptRuleTiming(json_data_load=json.loads(rules_timing_raw[x])))
+        self._rules = []
+        for rule in rules_data_raw:
+            self._rules.append(MNemuScriptRule(rule['setting'], rule['timing']))
         return
+
+    def update(self):
+        try:
+            for x in range(0, len(self._rule_states)):
+                rule_state = self._rule_states[x]
+                rule_setting = self._rule_settings[x]
+                rule_timing = self._rule_timings[x]
+
+        except Exception as exp:
+            #TODO: cf: More logging and handling
+            return
 
     def to_json(self):
         data = {}
         data["repeats"] = str(self._repeats)
-        rule_data = []
-        timing_data = []
-        for rule in self._rule_settings:
-            rule_data.append(rule.to_json())
-        data["rules"] = json.dumps(rule_data)
-        for timing in self._rule_timings:
-            timing_data.append(timing.to_json())
-        data["timing"] = json.dumps((timing_data))
+        data["name"] = self._name
+        data["tags"] = self._tags
+        rules_data = []
+        for rule in self._rules:
+            setting, timing = rule.to_dicts()
+            rules_data.append({"setting": setting, "timing": timing})
+        data["rules"] = json.dumps(rules_data)
 
         return json.dumps(data)
+
+
+
+#testing
+
+script = MNemuScript()
+rule_setting = MNemuScriptRuleSetting(1,2,3,4,5,6)
+rule_timing = MNemuScriptRuleTiming(10,20,30,40,50,60)
+rule = MNemuScriptRule(rule_setting, rule_timing)
+script._rules.append(rule)
+
+rule_setting = MNemuScriptRuleSetting(10,20,30,40,50,60)
+rule_timing = MNemuScriptRuleTiming(100,200,300,400,500,600)
+rule2 = MNemuScriptRule(rule_setting, rule_timing)
+
+script._rules.append(rule2)
+
+json_str = script.to_json()
+
+print(json_str)
+
+new_script = MNemuScript(json_data_str=json_str)
+
+if new_script is not None:
+    print("Yay!")
+

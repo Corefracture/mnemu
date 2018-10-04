@@ -23,34 +23,6 @@ class MNemuScriptRuleSetting:
         else:
             self.__dict__ = json_data_load
 
-    def _update_val(self):
-        return random.randrange(self._base_val, self._high_val)
-
-    def _check_probability(self):
-        return random.random() < self._update_prob
-
-    def _eval_and_update(self):
-        was_updated = False
-        now = time.time()
-        if self._random_update is True and \
-                ((now - self._last_update) > self._eval_interval):
-            if self._check_probability() is True:
-                was_updated = True
-                self._update_val()
-                self._last_update = now
-        return was_updated
-
-    def force_update_and_get(self):
-        return self._update_val()
-
-    def get_val(self):
-        should_update = self._eval_and_update()
-        return should_update, self._update_val()
-
-    def to_json(self):
-        return json.dumps(self.__dict__)
-
-
 class MNemuScriptRuleTiming:
     def __init__(self, start_secs=None, end_secs=None, active_dur_secs=None, repeat_delay_secs=None,
                  repeat_count=None, active_dir_rnd_inc=None, json_data_load=None):
@@ -66,10 +38,6 @@ class MNemuScriptRuleTiming:
 
         return
 
-    def to_json(self):
-        return json.dumps(self.__dict__)
-
-
 class MNemuScriptRuleState:
     def __init__(self):
         self.current_val = 0
@@ -78,3 +46,53 @@ class MNemuScriptRuleState:
         self.is_active = False
         self.last_eval = time.time()
         return
+
+class MNemuScriptRule:
+    def __init__(self, rule_setting=None, rule_timing=None, json_settings=None, json_timings=None):
+        if json_settings is not None and \
+                json_timings is not None:
+            self._load_from_json(json_settings, json_timings)
+        else:
+            self._setting = rule_setting
+            self._timing = rule_timing
+
+        self._state = MNemuScriptRuleState()
+        return
+
+    def _load_from_json(self, setting, timing):
+        self._setting = MNemuScriptRuleSetting(json_data_load=json.loads(setting))
+        self._timing = MNemuScriptRuleTiming(json_data_load=json.loads(timing))
+        return
+
+    def to_dicts(self):
+        rule_setting = self._setting.__dict__
+        rule_timing = self._timing.__dict__
+        return rule_setting, rule_timing
+
+
+    def _update_val(self):
+        return random.randrange(self._setting._base_val, self._setting._high_val)
+
+    def _check_probability(self):
+        return random.randrange(0, 100) < self._setting._update_prob
+
+    def _eval_and_update(self):
+        was_updated = False
+        now = time.time()
+        if self._setting._random_update is True and \
+                ((now - self._last_update) > self._setting._eval_interval):
+            if self._check_probability() is True:
+                was_updated = True
+                self._update_val()
+                self._last_update = now
+        return was_updated
+
+    def should_activate(self):
+        return random.randrange(0, 100) < self._setting._active_prob
+
+    def force_update_and_get(self):
+        return self._update_val()
+
+    def get_val(self):
+        should_update = self._eval_and_update()
+        return should_update, self._update_val()
