@@ -7,8 +7,10 @@
 import logging
 import time
 from threading import Lock
+import _thread
 from . import tc_cmds as tc, ip_settings
 from .mnemu_presets import MNemuPresets
+from .mnemu_scripting.mnemu_scriptmgr import MNemuScriptMgr
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -29,7 +31,11 @@ class MNemu:
         self._presets = MNemuPresets()
         self._rules_last_reset_time = time.time()
 
+        self.script_mgr = MNemuScriptMgr(self, 1)
+
         self.init_work()
+        _thread.start_new_thread(self.script_mgr.update, ())
+
 
     def init_work(self):
         self._reset_tc(self._iface_device)
@@ -122,10 +128,12 @@ class MNemu:
         tc.tc_reset(iface)
         tc.tc_ingress_reset(iface)
 
-    def get_ip_settings(self, ip):
+    def get_ip_settings(self, ip, dont_add=False):
+        ip_settings = None
         if ip not in self._master_ip_settings:
-            # Create the entries for this
-            ip_settings = self.add_new_ip(ip)
+            if dont_add is False:
+                # Create the entries for this
+                ip_settings = self.add_new_ip(ip)
         else:
             ip_settings = self._master_ip_settings[ip]
 

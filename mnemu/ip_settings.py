@@ -53,12 +53,12 @@ class IPSettings:
     def set_netem_setting(self, setting_type, setting_val, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
         set_to_val = netem_settings.netem_setting(netem.NetemType(setting_type), setting_val)
-        return set_to_val.get_val()
+        return set_to_val
 
     def get_netem_setting(self, setting_type, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
-        netem_type_set = netem_settings.netem_setting(netem.NetemType(setting_type))
-        return netem_type_set.get_val()
+        return netem_settings.netem_setting(netem.NetemType(setting_type))
+
 
     def set_netem_setting_corr(self, setting_type, setting_correlation, inbound=True):
         netem_settings = self.in_netem if inbound is True else self.out_netem
