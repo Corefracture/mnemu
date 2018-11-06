@@ -247,6 +247,10 @@ def specific_ip_old(ipnum):
 
 # endregion OLD REST API
 
+@web_srv.route('/script_editor')
+def script_ed():
+    return web_srv.send_static_file('script_editor.html')
+
 @web_srv.route('/')
 def web_app():
     return web_srv.send_static_file('index.html')
@@ -262,6 +266,4 @@ def parse_args():
 if __name__ == '__main__':
     arg_vals = parse_args()
     mnemu_web = MNemu(arg_vals.iface)
-    ip_settings = mnemu_web.get_ip_settings("192.168.20.1")
-    mnemu_web.script_mgr.set_script_on_ip("192.168.20.1", ip_settings, 1)
     web_srv.run(host=arg_vals.ip, port=arg_vals.port)
