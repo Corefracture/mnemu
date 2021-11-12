@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:height="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <script src="bootstrap.bundle.min.js"></script>
+    <link href="sidebars.css" rel="stylesheet">
+    <link href="mnemu.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <title>mNemu - Homepage</title>
+</head>
+
+<body style="font-size: 16px;">
+<div class="container">
+
+    <div class="row ">
+        <div class="col-sm-1 bg-light" style="width: 250px;">
+
+            <div class="row bg-light pt-3 pb-3" style="height: 60px;">
+                <a href="/"
+                   class="d-flex align-items-center link-dark text-decoration-none justify-content-center ">
+                    <div class="fs-5 fw-semibold align-items-center fs-2">mNemu</div>
+                    <img src="mnemu.png" style="height: 43px; width: 40px;" alt="mNemu" class="ps-2 pb-1 pe-2">
+                </a>
+            </div>
+            <div class="row " style="height: max-content">
+                <div class="border bg-li pt-1">
+                    <div class="container w-100 p-0 pt-2">
+                        <div class="row p-0 m-0">
+                            <div class='text-center pb-3 border-bottom' style="font-size: large; font-weight: bold">
+                                <button class="rounded border-1 bi bi-arrow-repeat"></button>
+                                <button class="rounded border-1 bi bi-plus"></button>
+                            </div>
+                        </div>
+                        <div class="row pt-3 pb-3 p-0 m-0 border-bottom">
+                            <div class="bi bi-house-fill link-dark rounded text-center">
+                                <a href="/" class="text-decoration-none link-dark rounded">192.168.86.1</a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled ps-0 pt-2">
+                        <li class="mb-1">
+
+                        </li>
+
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#fav-ips" aria-expanded="false">
+                                Favorite IPs
+                            </button>
+                            <div class="collapse" id="fav-ips">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-dark rounded">192.1.1.1</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="my-3 mb-3"></li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#known-ips" aria-expanded="true">
+                                Known IPs
+                            </button>
+                            <div class="collapse show" id="known-ips">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-dark rounded">192.168.86.1</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="border-top my-3"></li>
+                    </ul>
+                    <span class="bg-light"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col bg-light">
+
+            <div class="row p-2 bg-light" style="height: 60px;">
+                <div class="d-flex align-items-center  link-dark text-decoration-none justify-content-center">
+                    <div class="col fw-bold fs-5">Selected IP: 192.168.1.1</div>
+                    <div class="col text-end">
+                        <button class="rounded border-1 bi bi-star-fill"></button>
+                        <button class="rounded border-1 bi bi-eye-fill"></button>
+                        <i class="ps-2 pe-2">|</i>
+                        <button class="rounded border-1 bi bi-trash-fill"></button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="border"></div>
+
+            <div class="col border shadow">
+                <div class="row p-3">
+                    <div class="d-flex align-items-center bg-lightred rounded  link-dark text-decoration-none justify-content-center h3"
+                         data-bs-toggle="collapse" data-bs-target=".traffccollapse">
+                        Traffic Settings
+                    </div>
+
+                    <div class="col bg-light border-right border-secondary p-3 traffccollapse collapse show">
+                        <div id="in_traffic">
+                            <div class="row rounded border-bottom">
+                                <div class="col">
+                                    <div class="h4">
+                                        <i class="bi bi-cloud-download pe-2"></i>Inbound Traffic
+                                    </div>
+                                </div>
+                                <div class="col text-end">
+                                    <div class="btn-group pb-2">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Presets...
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row pt-3">
+                                <label for="in_bw" class="form-label small" data-bs-toggle="tooltip">Inbound Bandwidth
+                                    (Megabit)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range" min=".1" max="500" step=".1"
+                                           onchange="getElementById('in_bw_val').innerText = this.value"
+                                           onmousemove="getElementById('in_bw_val').innerText = this.value"
+                                           id="in_bw">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="in_bw_val">0</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label for="in_lat" class="form-label small">Inbound Latency (Milliseconds)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="2000" step="1"
+                                           onchange="getElementById('in_lat_val').innerText = this.value"
+                                           onmousemove="getElementById('in_lat_val').innerText = this.value"
+                                           id="in_lat">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="in_lat_val">0</div>
+                                </div>
+                            </div>
+
+                            <div class="p-3">
+                                <div class="border"></div>
+                            </div>
+                            <div class="row">
+                                <label for="in_loss" class="form-label small">Inbound Packet Loss (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('in_loss_val').innerText = (getElementById('in_loss').value)"
+                                           onmousemove="getElementById('in_loss_val').innerText = this.value + '%'"
+                                           id="in_loss">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="in_loss_val">0</div>
+                                </div>
+
+                                <label for="in_dupe" class="form-label small">Inbound Packet Duplication (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('in_dupe_val').innerText = (getElementById('in_dupe').value)"
+                                           onmousemove="getElementById('in_dupe_val').innerText = this.value + '%'"
+                                           id="in_dupe">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="in_dupe_val">0</div>
+                                </div>
+
+                                <label for="in_coru" class="form-label small">Inbound Packet Corruption (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('in_coru_val').innerText = (getElementById('in_coru').value)"
+                                           onmousemove="getElementById('in_coru_val').innerText = this.value + '%'"
+                                           id="in_coru">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="in_coru_val">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col bg-pr p-3 traffccollapse collapse show">
+                        <div id="out_traffic">
+                            <div class="row rounded border-bottom">
+                                <div class="col">
+                                <div class="h4">
+                                    <i class="bi bi-cloud-upload pe-2"></i>Outbound Traffic
+                                </div>
+                                </div>
+                                <div class="col text-end">
+                                    <div class="btn-group pb-2">
+                                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Presets...
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row pt-3">
+                                <label for="out_bw" class="form-label small">Outbound Bandwidth (Kilobits)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range" min="100" max="99999"
+                                           step="1"
+                                           onchange="getElementById('out_bw_val').innerText = (getElementById('out_bw').value)"
+                                           id="out_bw">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="out_bw_val">0</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label for="out_lat" class="form-label small">Outbound Latency (Milliseconds)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="2000" step="1"
+                                           onchange="getElementById('out_lat_val').innerText = (getElementById('out_lat').value)"
+                                           id="out_lat">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="out_lat_val">0</div>
+                                </div>
+                            </div>
+
+                            <div class="p-3">
+                                <div class="border"></div>
+                            </div>
+                            <div class="row">
+                                <label for="out_loss" class="form-label small">Outbound Packet Loss (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('out_loss_val').innerText = (getElementById('out_loss').value)"
+                                           id="out_loss">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="out_loss_val">0</div>
+                                </div>
+
+                                <label for="out_dupe" class="form-label small">Outbound Packet Duplication
+                                    (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('out_dupe_val').innerText = (getElementById('out_dupe').value)"
+                                           onmousemove="getElementById('out_dupe_val').innerText = this.value + '%'"
+                                           id="out_dupe">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="out_dupe_val">0</div>
+                                </div>
+
+                                <label for="out_coru" class="form-label small">Outbound Packet Corruption
+                                    (0-95%)</label>
+                                <div class="col">
+                                    <input type="range" class="form-control-lg form-range " min="0" max="95" step="1"
+                                           onchange="getElementById('out_coru_val').innerText = (getElementById('out_coru').value)"
+                                           onmousemove="getElementById('out_coru_val').innerText = this.value + '%'"
+                                           id="out_coru">
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group-text justify-content-center" id="out_coru_val">0</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="border"></div>
+
+
+        </div>
+    </div>
+    <span class="p-1"></span>
+    <div class="row bg-secondary justify-content-center">
+        Footer
+    </div>
+</div>
+
+
+</body>
+</html>
