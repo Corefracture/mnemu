@@ -1,6 +1,14 @@
 MNemu 
 ========
 
+## Updates Inbound! (12/21) ##
+Doing some major updates and clean up on the mNemu project as it seems to be
+gaining some use for QA teams and I want to support that better. I'm converting
+mNemu over to GO (for concurrency and future expansion) and a Bootstrap front 
+end (more modern look and feel). Along with this upgrade I'll be wrapping up the
+scripting system and introducing another new feature to allow for targeted 
+throttling of IPs and Domains! Stay tuned! :) 
+
 ## What is MNemu? ##
 MNemu is an open-source application developed to provide a simple, lightweight
 network emulation tool for testing and developing web, mobile, and standalone
